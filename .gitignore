@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 模型权重与训练产物（体积大，不入库；在云上实例生成）
+finetuned/
+models/
+model/
+*.safetensors
+model.safetensors
+output/logs/
+output/selftest/
+
+# 中间态 / 缓存 / 密钥
+.judge_cache.jsonl
+output/.judge_cache.jsonl
+*.bkp
+.env
+*.key
+
+# 编辑器
+.vscode/
+.obsidian/
+
+# 历史遗留
+test/
+1208/
+rl/
+knowledge/
+logs/
+data/ultrachat_200k
+data/ultrafeedback_binarized
+unsloth_compiled_cache/

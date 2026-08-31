@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "seed.schema.json",
+  "title": "汽车客服 V2 种子",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "seed_id", "split", "category_id", "category", "subcategory",
+    "scenario", "user_goal", "customer_role", "service_stage",
+    "required_facts", "required_questions", "required_actions",
+    "prohibited_actions", "tool_required", "tool_name"
+  ],
+  "properties": {
+    "seed_id": {"type": "string", "pattern": "^cat[1-8]_[a-z0-9_]+$"},
+    "split": {"enum": ["train", "validation", "final_test"]},
+    "category_id": {"type": "integer", "minimum": 1, "maximum": 8},
+    "category": {"type": "string", "minLength": 1},
+    "subcategory": {"type": "string", "minLength": 1},
+    "scenario": {"type": "string", "minLength": 1},
+    "user_goal": {"type": "string", "minLength": 1},
+    "customer_role": {"type": "string", "minLength": 1},
+    "service_stage": {"type": "string", "minLength": 1},
+    "required_facts": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "required_questions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "required_actions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "prohibited_actions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "tool_required": {"type": "boolean"},
+    "tool_name": {"type": ["string", "null"]}
+  }
+}

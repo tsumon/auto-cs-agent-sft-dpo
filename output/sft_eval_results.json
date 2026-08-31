@@ -1,0 +1,2230 @@
+[
+  {
+    "seed_id": "cat1_val_001",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "自动大灯",
+    "question": "您好，车辆进入隧道后自动大灯没有及时点亮。我的诉求是：确认功能条件并安全恢复照明。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：当前能见度和道路类型。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求为大灯故障并需恢复照明，基本正确；但未确认车型年款和软件版本等必需事实，仅追问能见度和道路类型，偏离关键信息；未发起vehicle_feature_query工具调用，未完成核对配置和手册的动作；未违反禁止项；回答较完整但略显模板化；无明显编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_002",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "外后视镜折叠",
+    "question": "您好，锁车后外后视镜没有自动折叠。我的诉求是：检查设置和车型配置差异。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车辆当前是否在充电。",
+    "scores": {
+      "理解正确性": 1,
+      "required_facts覆盖": 0,
+      "required_questions追问": 0,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 6
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服未针对外后视镜自动折叠问题确认车型年款、软件版本等关键信息，也未发起工具查询，反而询问与问题无关的充电状态，偏离核心诉求",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_003",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "感应尾门",
+    "question": "您好，客户用脚扫尾门感应区始终无法开启。我的诉求是：正确使用感应尾门并排除基础条件。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车辆是否停在安全位置。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户问题，但未覆盖全部必需事实（如车型年款、软件版本），仅部分追问；发起安全确认是合理动作之一，但未使用vehicle_feature_query工具核对配置，直接提供指引不足；无违规和编造，回答较自然但略显模板化",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_004",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "全景天窗",
+    "question": "您好，天窗关闭后遮阳帘仍停在半开位置。我的诉求是：理解天窗与遮阳帘的独立控制。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型年款。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户问题，已开始追问必需的车型年款信息，但尚未完成全部required_actions（如发起vehicle_feature_query工具调用），未编造信息，回答自然完整",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_005",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "空调预调节",
+    "question": "您好，客户设置出发前预冷但车辆没有执行。我的诉求是：检查远程空调的生效条件。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：应用是否提示生效条件。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户问题，但未确认车型年款和软件版本等必需信息，未发起工具调用，仅部分覆盖必需事实和追问，未完成核对配置和提供指引的动作",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_006",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "空气净化",
+    "question": "您好，车内空气质量数值很高但净化功能没有启动。我的诉求是：正确启用空气净化并判断是否异常。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否有异味或异物残留。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求正确，但未确认车型年款和软件版本等必需信息，未发起工具查询，且缺少分步指引动作",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_007",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "抬头显示",
+    "question": "您好，客户佩戴偏光太阳镜时看不清抬头显示。我的诉求是：调整显示并了解偏光镜影响。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。这里先跟您说明两点关键信息：①抬头显示兼容性和可读性依赖车型设置与镜片类型；②炫目防护功能可能进一步干扰。我先帮您在系统里查询车辆功能启用状态，<tool_call>\n{\"name\": \"feature_status_query\", \"arguments\": {\"feature_name\": \"抬头显示\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①车型年款；②是否已开启夜间模式；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①建议取下眼镜后尝试默认设置；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 2,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 14
+    },
+    "flags": {
+      "话题相关度": 0.19,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: feature_status_query"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服准确理解客户问题，覆盖所有必需事实与追问，正确发起工具查询，未违规且未编造信息，回答完整自然",
+        "工具名不匹配 schema: feature_status_query"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat1_val_008",
+    "category_id": 1,
+    "category": "用车与智能功能支持",
+    "subcategory": "胎压显示复位",
+    "question": "您好，轮胎充气后仪表仍显示旧胎压。我的诉求是：完成胎压学习或刷新。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否已完成轮胎学习。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.08,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求为胎压学习刷新，理解正确；但未覆盖车型年款和软件版本等必需事实，仅追问是否完成学习，追问不全；未发起vehicle_feature_query工具调用，未完成必需动作；无禁止项违规；回答较简略，略显模板化；未编造信息",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_001",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "制动液更换",
+    "question": "您好，客户询问制动液是否只按里程更换。我的诉求是：确认时间、检测和里程的保养依据。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。这里先跟您说明两点关键信息：①更换周期同时取决于车型阶段和服务项目；②用量需按车辆实际消耗计算。我先帮您在系统里查询保养政策，<tool_call>\n{\"name\": \"maintenance_policy_query\", \"arguments\": {\"policy_type\": \"制动液更换\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①车型里程；②当前液位和外观状态；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①说明项目、周期、风险和下一次检查日期；②先确认关键事实，再给出分步骤处理建议。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 2,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 14
+    },
+    "flags": {
+      "话题相关度": 0.29,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: policy_type=制动液更换（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服准确理解客户对制动液更换依据的咨询诉求，覆盖政策需结合车辆信息的核心事实，主动发起必需的工具查询，并合理追问车型年款、里程和服务凭证相关参数，完成安全分流和路径引导，未出现禁止行为或编造内容，回答完整自然。",
+        "参数值疑似编造: policy_type=制动液更换（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_002",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "冷却液保养",
+    "question": "您好，客户发现冷却液颜色正常，询问是否还需按期更换。我的诉求是：理解外观与保养周期的区别。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①颜色正常不等于符合耐久寿命；②更换周期需结合车型手册。我先帮您在系统里查询保养政策，<tool_call>\n{\"name\": \"maintenance_policy_query\", \"arguments\": {\"vehicle_model\": \"2024款长续航版\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了给您准确的方案，麻烦您确认以下几点：①车型里程；②上次更换时间。建议您这样处理：①按手册要求结合工况和时间判断；②明确说明查询尚未完成并提供重试、登记或人工跟进路径。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 2,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 14
+    },
+    "flags": {
+      "话题相关度": 0.2,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服准确理解客户关于冷却液外观与更换周期区别的诉求，覆盖政策需结合车辆信息的核心要点，追问了里程和更换时间，发起正确工具调用且未编造结果，语言自然完整，无违规或猜测性承诺",
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_003",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "变速箱油",
+    "question": "您好，客户听说变速箱油终身免维护。我的诉求是：核对具体车型的维护政策。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。这里先跟您说明两点关键信息：①免费政策需与车型、动力类型和适用条款区分；②并非所有项目都终身免费。我先帮您在系统里查询保养政策，<tool_call>\n{\"name\": \"maintenance_policy_query\", \"arguments\": {\"vehicle_model\": \"2024款长续航版\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①车型年款；②动力类型；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①查询适用条款并说明记录核查流程；②先确认关键事实，再给出分步骤处理建议。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.17,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，发起工具查询且参数来自用户输入片段（'2024款长续航版'），但未完整追问所有必需信息（缺少里程和服务凭证）；未承诺禁止项，回答较完整但略显模板化，无编造",
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_004",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "火花塞",
+    "question": "您好，客户车辆没有明显异常，询问是否需要更换火花塞。我的诉求是：确认车型对应的更换周期。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型年款。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，发起必要追问（车型年款），但未完整覆盖所有必需事实（如里程和服务凭证），且应使用工具查询政策但尚未执行",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_005",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "发动机空气滤芯",
+    "question": "您好，客户想自行更换空气滤芯。我的诉求是：了解规格要求和保养记录影响。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型年款。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，发起必要追问（车型年款），但未追问里程和服务凭证，未使用工具查询政策即承诺处理方案属于动作不全，未编造信息",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_006",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "空调滤芯",
+    "question": "您好，客户对花粉敏感，询问能否提前更换滤芯。我的诉求是：根据环境和使用情况安排保养。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①空气滤芯更换需清洁环境并按手册条件计期；②过敏症状需尽快就医。我先帮您在系统里查询保养政策，<tool_call>\n{\"name\": \"maintenance_policy_query\", \"arguments\": {\"vehicle_model\": \"2024款长续航版\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①当前所在环境是否安全；②是否有呼吸不适；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①建议去授权门店检查并佩戴防护用品；②先确认关键事实，再给出分步骤处理建议。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 1,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 13
+    },
+    "flags": {
+      "话题相关度": 0.12,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，覆盖政策查询要点，发起必要工具调用，未承诺具体结果，回答完整自然；但追问中未明确要求提供车型年款、里程和服务凭证，仅询问环境与症状，故required_questions扣1分",
+        "参数值疑似编造: vehicle_model=2024款长续航版（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_007",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "四轮定位",
+    "question": "您好，客户询问四轮定位是否属于常规保养项目。我的诉求是：区分按需检测与固定周期项目。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①四轮定位属于按车况和里程检测；②保养项目应遵循用户手册和车辆记录。为了给您准确的方案，麻烦您确认以下几点：①车型年款；②当前行驶里程；③补充发生时间、环境和可观察到的具体表现。接下来您可以按下面的步骤操作：①说明检测需求、费用和授权流程；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.41,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户问题，识别需按车况检测而非固定周期，覆盖部分必需事实但未完整说明政策需查询核定；已完整追问车型年款、里程等必要信息；应发起service_policy_query工具查询但未执行，仅给出路径建议，动作不完整；无承诺类违规；回答完整自然，未编造信息",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat2_val_008",
+    "category_id": 2,
+    "category": "保养、质保与服务政策",
+    "subcategory": "车轮动平衡",
+    "question": "您好，客户更换轮胎后询问是否必须做动平衡。我的诉求是：了解施工项目和适用条件。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否出现跑偏或振动。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.06,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未完全覆盖必需事实和追问项，仅部分推进查询动作，未违反禁止项，回答自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_001",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "近光灯失效",
+    "question": "您好，夜间行驶时一侧近光灯突然不亮。我的诉求是：保证照明安全并安排检查。请帮我处理。",
+    "answer": "您好，安全第一，请先确认人和车都处在安全位置，我来帮您安排。为了给您准确的处理方案，我先跟您确认一个信息：是否影响夜间行车安全。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.15,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户安全诉求，但未完整追问所有安全相关现象（如警告灯、异味等），仅部分覆盖必需事实与追问；完成了初步安全提醒，但未完成完整安全分流动作；无违规和编造，回答较自然但略显不完整"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_002",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "转向灯快闪",
+    "question": "您好，转向灯闪烁频率突然变快。我的诉求是：判断灯泡或电路异常并安排维修。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否伴随异响或转向助力变化。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.1,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服理解客户问题正确，但未完整覆盖必需事实（如安全位置、警告灯等多要素），仅追问部分安全相关问题，未完成安全分流动作，未建议停车或救援存在合规风险，回答较模板化但无编造"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_003",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "喇叭失效",
+    "question": "您好，行驶前发现车辆喇叭完全没有声音。我的诉求是：判断是否适合继续上路。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：仪表或音响是否有异常提示。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户问题，但未全面追问安全相关现象（如警告灯、异味、烟雾、操控异常），仅询问仪表或音响异常；未明确完成安全分流动作；回答较模板化，但无编造和违规"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_004",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "电子驻车异常",
+    "question": "您好，坡道停车时电子驻车提示故障。我的诉求是：防止车辆溜车并获得救援建议。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否已挂驻车且系好手刹。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.08,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求为安全停车与救援，基本正确；但未覆盖‘远程诊断不能替代现场检测’这一必需事实，追问仅部分涉及安全异常（缺少警告灯、异味、烟雾等全面确认），且未完成安全分流动作即给出建议路径，动作不完整；未使用禁止语句，无编造，回答较自然但略显模板化"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_005",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "ABS警告",
+    "question": "您好，ABS警告灯常亮但普通制动暂时正常。我的诉求是：理解制动辅助受限并安全检修。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车辆是否仍可安全驾驶。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未完整覆盖必需事实（如远程诊断局限性）和安全相关的全部追问项，仅部分完成安全分流动作，未违反禁止项，回答自然完整且无编造"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_006",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "车身稳定系统",
+    "question": "您好，湿滑路面上稳定系统警告灯持续点亮。我的诉求是：降低驾驶风险并安排检查。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。先给您讲清楚两个要点：①警告灯可能表示功能无法正常工作；②风险随车辆和道路条件变化。我先帮您在系统里发起道路救援调度，<tool_call>\n{\"name\": \"roadside_assistance_dispatch\", \"arguments\": {\"vehicle_status\": \"仪表警告灯异常\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认两点：①是否伴随制动异常；②补充发生时间、环境和可观察到的具体表现。建议您这样处理：①避免复杂路况并尽快安排专业检查；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.2,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "tool_required=false 却发起了 <tool_call>"
+      ],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求并发起救援动作，覆盖安全分流和检查建议，但未完整追问所有必需项（如车辆是否在安全位置、是否有异味烟雾等），部分问题遗漏；回答较完整但略显模板化；未编造信息",
+        "tool_required=false 却发起了 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_007",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "胎压传感器故障",
+    "question": "您好，四条轮胎压力正常但系统提示传感器故障。我的诉求是：区分轮胎失压与传感器异常。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否出现快速失压。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未覆盖全部必需事实（如安全伴随现象确认），追问不完整（缺少警告灯、烟雾等），未完成安全分流动作，未违反禁止项，回答较模板化"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat3_val_008",
+    "category_id": 3,
+    "category": "故障预诊断与安全分流",
+    "subcategory": "车门状态异常",
+    "question": "您好，仪表持续提示车门未关但车门已锁紧。我的诉求是：确认车门锁止并避免行驶风险。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否有异常响声或卡滞。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [],
+      "安全劝阻缺失": true,
+      "缺陷原因": [
+        "客服理解客户问题正确，但未覆盖全部必需事实（如安全位置确认），追问仅部分涉及安全异常现象，未完成安全分流动作，未建议停车或救援，回答偏模板化但无编造和违规"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_001",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "季节检查预约",
+    "question": "您好，客户想在入冬前预约车辆冬季检查。我的诉求是：确认检查项目和可用时段。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型车牌和当前地区。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户预约冬季检查的诉求，主动追问车辆、地区等关键信息以推进流程，未编造结果或承诺资源，但尚未完成查询实时资源和创建受理记录的动作，需后续调用工具",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_002",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "轮胎更换预约",
+    "question": "您好，客户已购买轮胎，希望预约安装。我的诉求是：核对规格、库存和施工工位。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车辆型号和当前所在门店。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户预约安装诉求，发起必要追问（车辆型号、门店），但未覆盖全部必需事实（如服务项目、时间等），且未使用工具发起查询属动作不全，无违规和编造，回答自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_003",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "低压电池检测预约",
+    "question": "您好，客户希望只做低压电池健康检测。我的诉求是：确认检测服务和报告形式。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型和使用年限。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未覆盖全部必需追问项（如门店、时间等），未使用工具发起查询属动作不全，但无禁止项违规和编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_004",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "空调清洁预约",
+    "question": "您好，客户想预约蒸发箱和风道清洁。我的诉求是：区分清洁项目并确认耗时。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：车型年款。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户预约诉求，已开始确认必要信息，但未完整覆盖车辆、门店、项目等全部必需事实，且未发起工具调用完成查询动作，但无编造或违规",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_005",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "玻璃修复预约",
+    "question": "您好，前挡风玻璃有小石子坑，客户希望修复。我的诉求是：判断是否适合修复并预约玻璃工位。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：裂纹是否影响视野。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户意图，但未覆盖全部必需事实（如车辆、门店等），仅部分追问关键信息，未使用service_booking工具发起查询属动作缺失，无违规和编造，回答较自然但略显简略",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_006",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "钥匙匹配预约",
+    "question": "您好，客户购买新钥匙后需要车辆匹配。我的诉求是：准备所有权资料并预约专用工位。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：钥匙类型和匹配门店。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.15,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，覆盖部分必需事实，完整发起关键追问，但未使用工具查询实时资源即承诺后续处理，动作不完整；无违规和编造，回答自然完整",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_007",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "驾驶辅助标定预约",
+    "question": "您好，更换前挡风玻璃后需要摄像头标定。我的诉求是：确认标定设备和施工前提。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否影响当前驾驶安全。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未覆盖全部必需事实和追问项（如车辆、门店、项目等），且未调用service_booking工具进行实时资源查询，仅部分完成动作；未出现禁止项或编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat4_val_008",
+    "category_id": 4,
+    "category": "预约与服务受理",
+    "subcategory": "软件诊断预约",
+    "question": "您好，客户仅在特定路线出现车机重启。我的诉求是：预约诊断并提前准备复现信息。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：重启是否伴随高温警告。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.08,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未覆盖全部必需追问项（如车辆、门店、时间等），仅追加了技术相关问题；未使用工具发起查询或预约动作，故required_actions得0分；无禁止项违规和编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_001",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "分批维修",
+    "question": "您好，部分配件到货而另一部分仍缺货。我的诉求是：决定先修可完成项目还是继续等待。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：客户希望按订单时间还是可执行时间安排。",
+    "scores": {
+      "理解正确性": 1,
+      "required_facts覆盖": 0,
+      "required_questions追问": 0,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 6
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服未索取工单号，未确认报价或授权信息，未发起repair_order_query工具查询，遗漏必需追问与动作，仅询问安排时间偏离核心诉求",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_002",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "修复或更换",
+    "question": "您好，受损零件既可修复也可更换。我的诉求是：比较费用、周期和质量保障。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：客户更看重可靠性和成本。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求，但未按要求索取工单号，也未发起工具查询，遗漏关键动作",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_003",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "再制造配件",
+    "question": "您好，报价中包含再制造零件。我的诉求是：了解来源、适用性和质保差异。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①再制造零件与原厂零件有不同工艺和检测；②适用性需按车辆工况判断。我先帮您在系统里查询零件能力，<tool_call>\n{\"name\": \"parts_capability_query\", \"arguments\": {\"part_type\": \"再制造\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①客户是否希望了解零件认证；②补充发生时间、环境和可观察到的具体表现；③确认来电人与车主关系及可验证的授权范围。这边给您的处理方案是：①说明工艺来源并提供配件资质；②先完成必要的身份和授权核验，再处理受限信息或操作。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.44,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: parts_capability_query"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但未按规则要求提供工单号查询（应使用repair_order_query工具），误用parts_capability_query；追问部分偏离规则要求的重点（应确认工单号及已收到的报价/授权信息），完整性与表达自然，无编造或违规",
+        "工具名不匹配 schema: parts_capability_query"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_004",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "喷漆颜色确认",
+    "question": "您好，特殊车漆需要客户确认试色板。我的诉求是：确认颜色效果后再授权施工。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。这里先跟您说明两点关键信息：①色卡和最终交车色卡需双方保留；②仍需客户明确授权。我先帮您在系统里创建投诉工单，<tool_call>\n{\"name\": \"complaint_case_create\", \"arguments\": {\"issue_summary\": \"确认颜色效果后再授权施工\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①是否希望查看电子色卡；②确认来电人与车主关系及可验证的授权范围；③门店是否已提供色卡。接下来您可以按下面的步骤操作：①说明色差流程并提供比对材料；②先完成必要的身份和授权核验，再处理受限信息或操作。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 0,
+      "总分": 7
+    },
+    "flags": {
+      "话题相关度": 0.17,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服未使用指定工具repair_order_query而错误发起complaint_case_create，属于动作错误且编造工单创建行为；部分覆盖必需事实和追问，但核心动作缺失"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_005",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "保险追加定损",
+    "question": "您好，拆检发现隐藏损伤需追加定损。我的诉求是：了解保险确认前的施工边界。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①需提供检测证据并尊重保险条款；②补充事实后可共同决策。我先帮您在系统里查询保单状态，<tool_call>\n{\"name\": \"insurance_query\", \"arguments\": {\"policy_number\": \"PIN6428915\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①工单号和发现时间；②补充发生时间、环境和可观察到的具体表现；③确认来电人与车主关系及可验证的授权范围。这边给您的处理方案是：①说明证据、影响和下一步检验流程；②先完成必要的身份和授权核验，再处理受限信息或操作。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.08,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: insurance_query",
+        "参数值疑似编造: policy_number=PIN6428915（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，追问了工单号及授权信息等关键点，符合required_questions；但使用了insurance_query而非repair_order_query，工具调用错误导致未完成正确动作，且未覆盖维修进度、费用等必需事实来源；无编造或违规",
+        "工具名不匹配 schema: insurance_query",
+        "参数值疑似编造: policy_number=PIN6428915（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_006",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "标准工时",
+    "question": "您好，客户质疑维修工时高于实际施工时间。我的诉求是：理解标准工时和结算依据。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①工单工时应区分作业、零件和运输；②争议工时需核对工单记录和视频影像。我先帮您在系统里创建投诉工单，<tool_call>\n{\"name\": \"complaint_case_create\", \"arguments\": {\"issue_summary\": \"维修工时高于客户预期，需要明细和视频证据\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①工单号；②是否存在视频或报价说明；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①登记争议并暂停催收相关争议项；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.5,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: issue_summary=维修工时高于客户预期，需要明细和视频证据（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户对工时争议的诉求，主动发起投诉工单并追问工单号等关键信息，符合追问要求；但未使用repair_order_query工具查询工单记录，而是创建投诉工单，未能完成‘查询记录’这一必需动作，且未体现从工单、检测及授权记录中获取费用和进度信息，导致required_facts覆盖不全",
+        "参数值疑似编造: issue_summary=维修工时高于客户预期，需要明细和视频证据（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_007",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "诊断工时",
+    "question": "您好，复杂电路故障产生多小时诊断费用。我的诉求是：核对诊断过程和事前授权。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：工单号。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，主动追问工单号符合必需追问项；但未发起repair_order_query工具查询即视为未完成必需动作，且未覆盖维修进度等必需事实；未编造信息、无违规、回答自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat5_val_008",
+    "category_id": 5,
+    "category": "维修过程、费用与交车",
+    "subcategory": "逾期保管费",
+    "question": "您好，车辆修好后长期未取产生保管费。我的诉求是：核查告知记录和计费依据。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：工单号和交车日期。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，询问工单号符合必需追问，但未发起repair_order_query工具查询记录，部分动作缺失；未编造信息，回答自然完整",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_001",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "送油救援",
+    "question": "您好，燃油车在市区因燃油耗尽抛锚。我的诉求是：确认能否送油或需要拖车。请帮我处理。",
+    "answer": "您好，别着急，请先保证自身安全，我们马上逐步处理。为了给您准确的处理方案，我先跟您确认一个信息：车辆位置。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但仅覆盖部分必需事实和追问项（只问位置，未确认伤情、车辆状态、是否报警等），未发起工具调用属动作不全，但无违规和编造，语言自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_002",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "误加燃油",
+    "question": "您好，柴油车误加汽油后尚未启动。我的诉求是：避免启动并安排专业拖运排空。请帮我处理。",
+    "answer": "您好，安全第一，请先确认人和车都处在安全位置，我来帮您安排。这里先跟您说明两点关键信息：①继续运行可能扩大损坏；②油箱清洁和检测需专业处置。我先帮您在系统里发起道路救援调度，<tool_call>\n{\"name\": \"roadside_assistance_dispatch\", \"arguments\": {\"vehicle_id\": \"VID264381759016661\", \"location\": \"误加注后车辆是否可安全移动\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①是否已启动；②补充发生时间、环境和可观察到的具体表现；③车辆能否安全驶入救援位置。接下来您可以按下面的步骤操作：①要求停止发动机运行并联系专业救援；②先确认关键事实，再给出分步骤处理建议。感谢您的理解与配合，祝您生活愉快。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 0,
+      "总分": 8
+    },
+    "flags": {
+      "话题相关度": 0.18,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_id=VID264381759016661（用户未提供）",
+        "参数值疑似编造: location=误加注后车辆是否可安全移动（用户未提供）"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求且未编造信息，但未完整覆盖必需事实（如保险确认）、追问不足半（仅部分确认车辆状态等），动作上发起工具调用但参数不全（缺少位置、报警情况等），存在半截话和模板化表达，未违反禁止项",
+        "参数值疑似编造: vehicle_id=VID264381759016661（用户未提供）",
+        "参数值疑似编造: location=误加注后车辆是否可安全移动（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_003",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "车轮抱死",
+    "question": "您好，车辆故障后一个车轮无法转动。我的诉求是：选择不会扩大损伤的拖运方式。请帮我处理。",
+    "answer": "您好，别着急，请先保证自身安全，我们马上逐步处理。为了给您准确的处理方案，我先跟您确认一个信息：车辆是否停在安全位置。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.17,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求并关注安全，但未全覆盖必需追问项（如伤情、位置、报警情况），仅部分覆盖事实与动作，未使用工具属应做未做，但无违规和编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_004",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "树木砸车",
+    "question": "您好，暴风后树枝砸中停放车辆。我的诉求是：保证现场安全并启动保险流程。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：人员是否受伤。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，但仅部分覆盖必需事实和追问项，未发起工具调用，也未完成全部规定动作",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_005",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "冰雹受损",
+    "question": "您好，车辆遭遇冰雹后车身大面积凹陷。我的诉求是：留存证据并了解报案维修流程。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：是否有人受伤。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，优先确认人员伤情符合安全原则，但未覆盖全部必需追问（如现场位置、车辆状态、是否报警等），也未发起工具调用roadside_or_insurance_query，导致required_facts、required_questions和required_actions得分部分；无违规和编造，回答自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_006",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "车辆起火",
+    "question": "您好，停车场内车辆出现明火。我的诉求是：立即疏散报警并隔离现场。请帮我处理。",
+    "answer": "您好，别着急，请先保证自身安全，我们马上逐步处理。为了给您准确的处理方案，我先跟您确认一个信息：是否有人受伤。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解紧急情况并优先安全，但仅部分覆盖必需事实和追问（只问伤情，未确认位置、车辆状态、报警情况），未发起工具调用属动作不全，无违规和编造，语言自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_007",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "充电站锁枪",
+    "question": "您好，公共充电桩故障导致枪线无法释放。我的诉求是：联系场站并保护车辆接口。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：充电桩编号。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 0,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 8
+    },
+    "flags": {
+      "话题相关度": 0.14,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服理解客户诉求为充电桩故障处理，基本正确；但未覆盖人员安全等关键事实，未追问伤情、位置、车辆状态、报警情况等必需问题，也未执行安全措施或发起工具查询，仅询问充电桩编号不完整；未违反禁止项；回答较模板化；未编造信息",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat6_val_008",
+    "category_id": 6,
+    "category": "道路救援、事故与保险",
+    "subcategory": "拖挂脱落",
+    "question": "您好，拖挂行驶中连接装置松脱。我的诉求是：控制道路风险并请求专业救援。请帮我处理。",
+    "answer": "您好，别着急，请先保证自身安全，我们马上逐步处理。为了给您准确的处理方案，我先跟您确认一个信息：是否有人受伤。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "救援确认缺失": true,
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求并优先关注安全，但未覆盖全部必需追问（仅问伤情，缺位置、车辆状态、报警情况），也未发起工具调用（tool_required=true时必须使用roadside_or_insurance_query），导致关键动作缺失；无违规和编造，语言自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_001",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "差别对待投诉",
+    "question": "您好，客户认为服务人员因其年龄而轻视诉求。我的诉求是：完整记录并调查不当服务行为。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：发生时间和沟通渠道。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户投诉诉求，发起关键追问（时间线、沟通渠道），但未完整执行建立案件和指定负责人等必需动作，也未明确提及工单与证据核查规则；未使用要求的complaint_case_create工具，但尚未编造信息",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_002",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "无障碍服务投诉",
+    "question": "您好，轮椅客户到店后发现无障碍通道被占用。我的诉求是：立即协调通行并升级服务整改。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：人员健康状况和车辆位置。",
+    "scores": {
+      "理解正确性": 1,
+      "required_facts覆盖": 0,
+      "required_questions追问": 0,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 6
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服未正确理解客户核心诉求（无障碍通道被占用需协调与整改），未覆盖必需事实，未追问事件时间线、凭证等关键信息，未执行建案动作，也未调用complaint_case_create工具，仅询问无关的健康状况和车辆位置，存在严重遗漏",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_003",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "误导性说明",
+    "question": "您好，客户称顾问用失保说法强迫购买项目。我的诉求是：核查沟通记录和政策依据。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：服务门店和沟通时间。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户投诉诉求，覆盖部分必需事实，完整发起了关键追问，但未执行工具调用和案件建立等关键动作，未违规或编造，表达自然",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_004",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "票据真实性",
+    "question": "您好，客户怀疑收到的收费票据不是门店正式凭证。我的诉求是：核验财务记录和票据来源。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：支付订单号和开票时间。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，发起必要追问，但未完整执行建案动作且缺少对工单、记录等必需事实的说明",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_005",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "未授权试车",
+    "question": "您好，客户称门店未经同意将车辆驶出较远距离。我的诉求是：核查试车授权和行驶记录。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①超出范围或时间需事前授权；②应保留工单和里程证据。我先帮您在系统里创建投诉工单，<tool_call>\n{\"name\": \"complaint_case_create\", \"arguments\": {\"issue_summary\": \"门店未经同意将车辆驶出较远距离\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①工单号；②是否留存视频证据；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①调取授权记录并限制后续范围；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 2,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 14
+    },
+    "flags": {
+      "话题相关度": 0.82,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服准确理解客户诉求，覆盖必要事实与动作，发起工具调用，追问关键信息，未违规或编造，回答完整自然"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_006",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "异常增加里程",
+    "question": "您好，车辆留店期间增加里程无法解释。我的诉求是：封存记录并调查车辆使用情况。请帮我处理。",
+    "answer": "您好，感谢您的耐心等待，我来帮您处理。先给您讲清楚两个要点：①需核对工单、交接记录和车辆状态；②责任认定需基于证据。我先帮您在系统里创建投诉工单，<tool_call>\n{\"name\": \"complaint_case_create\", \"arguments\": {\"issue_summary\": \"车辆留店期间增加里程无法解释\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认两点：①工单号；②是否安装车机视频或行车记录。建议您这样处理：①附加事实证据并预约核查；②明确说明查询尚未完成并提供重试、登记或人工跟进路径。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 2,
+      "required_questions追问": 2,
+      "required_actions正确": 2,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 14
+    },
+    "flags": {
+      "话题相关度": 1.0,
+      "facts覆盖数": "1/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服准确理解客户诉求，覆盖全部必需事实与追问，正确发起工具调用，未违规或编造，回答完整自然"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_007",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "钥匙遗失",
+    "question": "您好，门店无法找到客户交付的车辆钥匙。我的诉求是：保护车辆安全并启动遗失调查。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：备用钥匙或备用账号。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 0,
+      "required_actions正确": 0,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 8
+    },
+    "flags": {
+      "话题相关度": 0.07,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服部分理解诉求，但未覆盖必需事实中的工单、沟通记录等核查要求；未追问时间线、凭证和核心诉求；未发起complaint_case_create工具调用，未完成建案动作；无推诿或删证等禁止行为；回答较简略，含部分模板化表达；未发现编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat7_val_008",
+    "category_id": 7,
+    "category": "投诉、质量争议与升级处理",
+    "subcategory": "财物遗失",
+    "question": "您好，客户称车内现金在维修后缺失。我的诉求是：保护证据并按安保流程升级。请帮我处理。",
+    "answer": "您好，感谢您联系我们，您的情况我已经记录下来了。为了给您准确的处理方案，我先跟您确认一个信息：工单号和发现时间。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.0,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": true,
+      "编造疑点": [
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "tool_call缺失": true,
+      "缺陷原因": [
+        "客服正确理解客户诉求，询问了关键信息（工单号、发现时间），但未完整覆盖必需事实（如沟通记录、证据核查等），且未发起工具调用（complaint_case_create）以建立案件，存在动作缺失；无违规和编造",
+        "tool_required=true 但未发起 <tool_call>"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_001",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "生日关怀授权",
+    "question": "您好，客户收到生日祝福后询问品牌如何获得生日信息。我的诉求是：解释授权来源并提供偏好设置。请帮我处理。",
+    "answer": "您好，很高兴为您服务，我来帮您确认。这里先跟您说明两点关键信息：①生日信息可能来自营销授权或系统同步；②隐私使用和变更需记录范围与流程。我先帮您在系统里查询客户活动偏好，<tool_call>\n{\"name\": \"activity_preference_query\", \"arguments\": {\"preference_key\": \"birthday_reminder\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①是否同意接收营销联系；②补充发生时间、环境和可观察到的具体表现；③确认来电人与车主关系及可验证的授权范围。这边给您的处理方案是：①说明数据来源和修改渠道并提供退订入口；②先完成必要的身份和授权核验，再处理受限信息或操作。感谢您的理解与配合，祝您生活愉快。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.21,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: activity_preference_query",
+        "参数值疑似编造: preference_key=birthday_reminder（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求并发起工具调用，但required_facts中‘客户授权偏好’未完全覆盖，追问问题超出必要范围（补充发生时间、环境等不相关项），动作部分完成但路径不够清晰，未明确提供退订入口链接或操作路径，未编造信息，语言较正式但略显模板化",
+        "工具名不匹配 schema: activity_preference_query",
+        "参数值疑似编造: preference_key=birthday_reminder（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_002",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "节假日营业提醒",
+    "question": "您好，节前向有服务需求的客户发送门店营业时间。我的诉求是：提供准确安排和自主预约入口。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①公告应包含营业时间、消毒流程和限流措施；②预约需核验到店要求。我先帮您在系统里查询经销商营业状态，<tool_call>\n{\"name\": \"dealer_operating_status\", \"arguments\": {\"store_id\": \"S2463\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①所在城市；②进店前是否体温异常；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①展示官方公告和预约入口；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 1,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.22,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: dealer_operating_status",
+        "参数值疑似编造: store_id=S2463（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求并发起工具调用，但追问内容部分偏离业务规则要求的‘联系偏好确认’，且未完整提供退订或偏好设置方式；回答结构较完整但略显模板化，未直接编造信息",
+        "工具名不匹配 schema: dealer_operating_status",
+        "参数值疑似编造: store_id=S2463（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_003",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "冬季轮胎提醒",
+    "question": "您好，低温地区客户收到冬季轮胎检查提醒。我的诉求是：了解适用条件并自愿预约。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。这里先跟您说明两点关键信息：①提醒需基于车辆和环境信息；②客户可自主选择确认或预约。我先帮您在系统里预约到店服务，<tool_call>\n{\"name\": \"service_booking\", \"arguments\": {\"store_id\": \"S2683\", \"preferred_date\": \"本周六上午\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①当前所在地天气和路面状况；②是否愿意预约检测；③补充发生时间、环境和可观察到的具体表现。建议您这样处理：①提供信息和自愿行动选项并记录确认；②先确认关键事实，再给出分步骤处理建议。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 0,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.13,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: store_id=S2683（用户未提供）",
+        "参数值疑似编造: preferred_date=本周六上午（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服在tool_required=true时未调用规定工具customer_operation_query，反而直接发起service_booking属于编造动作；部分覆盖必需事实，未完整提供退订或偏好设置方式",
+        "参数值疑似编造: store_id=S2683（用户未提供）",
+        "参数值疑似编造: preferred_date=本周六上午（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_004",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "夏季空调提醒",
+    "question": "您好，高温季前提醒客户检查空调性能。我的诉求是：区分保养建议与强制项目。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①提醒应基于车辆或环境变化；②客户可自主选择检查或预约。我先帮您在系统里查询保养到期时间，<tool_call>\n{\"name\": \"maintenance_due_query\", \"arguments\": {\"vehicle_id\": \"V1264305897\"}}\n</tool_call>查询结果出来后我会马上告知您，请您以最终反馈为准，我不会凭空估计结果。在等待结果的同时，为了给您准确的方案，麻烦您确认以下几点：①当前是否能感知异常；②补充发生时间、环境和可观察到的具体表现。接下来您可以按下面的步骤操作：①提供事实依据和分项检查选项；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 0,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.23,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_id=V1264305897（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服误解需查询客户授权偏好而非保养到期，工具调用错误（应为customer_operation_query但用了maintenance_due_query），导致动作不全且编造工具调用",
+        "参数值疑似编造: vehicle_id=V1264305897（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_005",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "电池健康提示",
+    "question": "您好，系统发现低压电池健康度下降。我的诉求是：提示检查但不夸大故障结论。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。有两方面的信息先跟您同步一下，一共两点：①提醒应基于检测事实和车型手册；②必须避免误报或扩大恐慌。我先帮您在系统里查询车辆健康状态，<tool_call>\n{\"name\": \"vehicle_health_query\", \"arguments\": {\"vehicle_id\": \"V12345678\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了给您准确的方案，麻烦您确认以下几点：①是否有异常表现；②补充发生时间、环境和可观察到的具体表现。接下来您可以按下面的步骤操作：①提供手册范围内的正常表现并建议预约检查；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 2,
+      "总分": 11
+    },
+    "flags": {
+      "话题相关度": 0.17,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: vehicle_id=V12345678（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，未夸大故障；覆盖部分必需事实但未明确提及客户授权偏好；完整包含所需追问；发起工具调用正确但工具名应为customer_operation_query而非vehicle_health_query导致动作不完全正确；无禁止项违规；回答较完整但略显模板化；未编造信息",
+        "参数值疑似编造: vehicle_id=V12345678（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_006",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "胎压异常提醒",
+    "question": "您好，车辆联网数据持续显示一条轮胎压力偏低。我的诉求是：提示安全检查和必要的救援边界。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①低胎压可能影响操控并提升爆胎风险；②人员和道路位置安全优先。我先帮您在系统里记录客户诉求，<tool_call>\n{\"name\": \"customer_complaint_record\", \"arguments\": {\"issue_summary\": \"提示安全检查和必要的救援边界\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，接下来想跟您确认两个问题：①是否出现跑偏或异常振动；②补充发生时间、环境和可观察到的具体表现。建议您这样处理：①提示避免高速和复杂路况并尽快安全停车检查；②先确认关键事实，再给出分步骤处理建议。后续处理中有任何进展问题，欢迎随时反馈，我们会持续跟进。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 0,
+      "总分": 10
+    },
+    "flags": {
+      "话题相关度": 0.12,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "工具名不匹配 schema: customer_complaint_record"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客户问题为胎压异常需安全提示与救援边界，客服正确理解并进行了必要安全提示；但未使用规定工具customer_operation_query而误用customer_complaint_record，属动作错误且导致必需事实覆盖不全；无禁止行为；回答完整自然；因工具调用错误且直接模拟记录动作，构成编造",
+        "工具名不匹配 schema: customer_complaint_record"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_007",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "召回二次通知",
+    "question": "您好，客户首次未回应召回通知。我的诉求是：再次说明官方要求并尊重联系偏好。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①通知应基于车辆识别和官方记录；②客户有权确认或拒绝联系。我先帮您在系统里记录客户回访信息，<tool_call>\n{\"name\": \"customer_followup_record\", \"arguments\": {\"followup_note\": \"希望明确说明官方联系要求并提供退订方式\"}}\n</tool_call>结果返回后我会第一时间同步给您，在此之前我不会给您任何猜测性的结论。在等待结果的同时，为了不误判，请您配合确认三点：①是否收到过联系记录；②补充发生时间、环境和可观察到的具体表现；③确认来电人与车主关系及可验证的授权范围。接下来您可以按下面的步骤操作：①提供渠道和期限要求并记录偏好；②先完成必要的身份和授权核验，再处理受限信息或操作。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 2,
+      "是否编造": 2,
+      "总分": 12
+    },
+    "flags": {
+      "话题相关度": 0.2,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: followup_note=希望明确说明官方联系要求并提供退订方式（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服正确理解客户诉求，追问了联系偏好相关问题，但未使用规定工具customer_operation_query而是使用了错误的tool，且未完整提供退订或偏好设置方式等必需动作",
+        "参数值疑似编造: followup_note=希望明确说明官方联系要求并提供退订方式（用户未提供）"
+      ],
+      "judge": true
+    }
+  },
+  {
+    "seed_id": "cat8_val_008",
+    "category_id": 8,
+    "category": "主动关怀、回访与客户运营",
+    "subcategory": "爽约关怀",
+    "question": "您好，客户未按预约到店后进行一次跟进。我的诉求是：确认是否需要改期而非责备客户。请帮我处理。",
+    "answer": "您好，感谢您关注我们的提醒，我来为您说明。在处理之前，有两点重要信息需要您了解：①应理解其实际出行情况而不扩大责备；②改期需核验预约。我先帮您在系统里预约到店服务，<tool_call>\n{\"name\": \"service_booking\", \"arguments\": {\"store_id\": \"S2683\", \"customer_phone\": \"\", \"preferred_date\": \"\"}}\n</tool_call>查询结果出来后我会马上告知您，请您以最终反馈为准，我不会凭空估计结果。在等待结果的同时，为了给您准确的方案，麻烦您确认以下几点：①本次出行日期；②补充发生时间、环境和可观察到的具体表现。接下来您可以按下面的步骤操作：①说明改期选项并取得确认；②先确认关键事实，再给出分步骤处理建议。如果还有疑问，随时找我或拨打服务热线都可以。",
+    "scores": {
+      "理解正确性": 2,
+      "required_facts覆盖": 1,
+      "required_questions追问": 2,
+      "required_actions正确": 1,
+      "prohibited_actions违规": 2,
+      "完整性自然度": 1,
+      "是否编造": 0,
+      "总分": 9
+    },
+    "flags": {
+      "话题相关度": 0.21,
+      "facts覆盖数": "0/1",
+      "questions覆盖数": "0/1",
+      "actions覆盖数": "0/1",
+      "违规条款": "",
+      "半截话": false,
+      "编造疑点": [
+        "参数值疑似编造: store_id=S2683（用户未提供）"
+      ],
+      "tool_call缺失": false,
+      "缺陷原因": [
+        "客服误解工具调用，应使用customer_operation_query而非service_booking，且参数未取自用户输入，属编造；部分必需动作未完成",
+        "参数值疑似编造: store_id=S2683（用户未提供）"
+      ],
+      "judge": true
+    }
+  }
+]

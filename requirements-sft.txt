@@ -1,0 +1,11 @@
+# SFT 训练依赖（魔搭 AMD MI300X / ROCm 实例）
+# 安装：pip install -r requirements-sft.txt
+# 注意：不装 bitsandbytes（ROCm 兼容差）、不装 flash-attn（脚本统一用 sdpa）
+# 实例自带的 ROCm 版 PyTorch 不要动，若 torch<2.1 请换镜像，不要自行重装
+transformers>=4.51
+peft>=0.15
+trl>=0.17
+datasets>=2.19
+accelerate>=0.31
+modelscope>=1.20
+tensorboard
