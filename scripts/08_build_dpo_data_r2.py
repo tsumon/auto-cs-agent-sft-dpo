@@ -237,6 +237,7 @@ def _make_tool_call_seg(seed: dict, schemas: dict, variant: int) -> tuple:
 
 
 def _make_question_seg(seed: dict, variant: int) -> str:
+    """把 required_questions 拼成①②分点追问段；无追问项返回空串，引导语按 variant 轮换。"""
     qs = seed.get("required_questions") or []
     if not qs:
         return ""
@@ -250,6 +251,7 @@ def _make_question_seg(seed: dict, variant: int) -> str:
 
 
 def _make_action_seg(seed: dict, variant: int) -> str:
+    """把 required_actions 拼成①②分步处理建议段；无处理项返回空串，引导语按 variant 轮换。"""
     acts = seed.get("required_actions") or []
     if not acts:
         return ""
@@ -320,10 +322,13 @@ def build_one_pair(seed: dict, schemas: dict, chosen_style: int, rejected_fn,
 
 
 def to_trl(p: dict) -> dict:
+    """转 TRL DPOTrainer 会话格式：prompt 取 messages，chosen/rejected 各包成单元素消息列表。"""
     return {"prompt": p["messages"], "chosen": [p["chosen"]], "rejected": [p["rejected"]]}
 
 
 def main():
+    """train 种子 × 3 种 chosen 风格 × 4 类 rejected 逐一配对去重，按缺陷类型配额抽样至 TARGET_PAIRS，
+    输出 ms-swift 与 TRL 两种格式、统计报告与 10 对抽样。"""
     random.seed(SEED)
     os.makedirs(OUT_DIR, exist_ok=True)
 

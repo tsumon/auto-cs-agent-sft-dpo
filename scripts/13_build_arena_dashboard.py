@@ -83,17 +83,23 @@ footer { margin-top: 30px; font-size: 12px; color: #9aa5b1; }
 
 
 def is_bad(rec: dict, model: str) -> bool:
+    """判定某一侧回答是否为 Bad Case：总分 ≤ BAD_THRESH，或除「理解正确性」外任一维度得 0。"""
     s = rec[model]["scores"]
     return s["总分"] <= BAD_THRESH or any(s[k] == 0 for k in NON_UNDERSTAND_DIMS)
 
 
 def fmt_answer(text: str) -> str:
+    """把回答转成可安全嵌入 HTML 的片段：先整体转义，再把 tool_call 标签包成高亮 span。"""
     out = html.escape(text or "（空）")
     return out.replace("&lt;tool_call&gt;", '<span class="tc">&lt;tool_call&gt;') \
               .replace("&lt;/tool_call&gt;", "&lt;/tool_call&gt;</span>")
 
 
 def metric_cards(items: list) -> str:
+    """渲染顶部核心指标卡片：SFT/DPO 均分、均分差、竞技场胜率、Elo 分差、明显更好/更差条数。
+
+    Elo 由胜负平反推（平局按半场计入双方），一方战绩为 0 时无法取对数，直接截断到 ±800。
+    """
     n = len(items)
     sft = sum(r["sft"]["scores"]["总分"] for r in items) / n
     dpo = sum(r["dpo"]["scores"]["总分"] for r in items) / n
@@ -127,6 +133,10 @@ def metric_cards(items: list) -> str:
 
 
 def cat_bars(items: list) -> str:
+    """按 category_id 分组，画 SFT/DPO 均分的双条形图，右列标注 Δ。
+
+    手写 SVG 而非引图表库：看板要求自包含、离线可打开。
+    """
     by: dict = {}
     for r in items:
         by.setdefault(r["category_id"], []).append(r)
@@ -156,6 +166,7 @@ def cat_bars(items: list) -> str:
 
 
 def radar(items: list) -> str:
+    """画 7 维得分率雷达图（SVG）：每维满分 2 分，均分除以 2 归一到 0~1 再连成多边形。"""
     import math
     cx, cy, R = 210, 150, 105
     n_dim = len(DIMS)
@@ -188,7 +199,9 @@ def radar(items: list) -> str:
 
 
 def battle_stacks(items: list) -> str:
+    """渲染竞技场战绩堆叠条：总体一行，再按类别各一行，胜/负/平三色分段。"""
     def row(label, rs):
+        """把一组对战统计成胜/负/平并换算成三段宽度百分比，返回一行堆叠条 HTML。"""
         n = len(rs)
         w = sum(1 for r in rs if r["arena"]["verdict"] == "dpo")
         l = sum(1 for r in rs if r["arena"]["verdict"] == "sft")
@@ -210,6 +223,12 @@ def battle_stacks(items: list) -> str:
 
 
 def battle_cards(items: list, full: bool = True) -> str:
+    """渲染每场对战的详情卡片，按类别 + seed_id 排序。
+
+    A/B 两栏按 arena.dpo_is_a 还原竞技场站位，身份标签挂 hidden-ident 类默认隐藏，勾选才揭示。
+    卡片上的 data-verdict / data-bad / data-cat 供前端筛选按钮使用。
+    full=False 对应只有判定与判词的 Arena 校验结果，此时不渲染逐模型回答与得分。
+    """
     cards = []
     for r in sorted(items, key=lambda x: (x["category_id"], x["seed_id"])):
         verdict = r["arena"]["verdict"]
@@ -238,6 +257,7 @@ def battle_cards(items: list, full: bool = True) -> str:
         reason = "；".join(x for x in r["arena"].get("reasons", []) if x) or "—"
 
         def col(tag, ident, model):
+            """渲染单侧回答栏：正文、得分、打分来源（Judge/规则分）与缺陷标记。"""
             s = r[model]["scores"]
             fl = r[model]["flags"]
             marks = []
@@ -302,6 +322,12 @@ SCRIPT = """
 
 
 def build(items: list, out_path: str) -> str:
+    """组装整页 HTML（CSS + 图表区 + 对战卡片 + 内联 JS）写入 out_path，返回该路径。
+
+    用首条记录里有没有 sft.answer 探测输入类型：完整评估结果渲染指标卡 + 柱状 + 雷达 + 战绩；
+    只有判定的 Arena 校验结果退化成仅战绩堆叠条，标题、副标题与筛选控件跟着切换。
+    CSS 与 JS 全部内联，产物是单文件静态页，可离线打开。
+    """
     n = len(items)
     w = sum(1 for r in items if r["arena"]["verdict"] == "dpo")
     l = sum(1 for r in items if r["arena"]["verdict"] == "sft")
@@ -348,6 +374,10 @@ def build(items: list, out_path: str) -> str:
 
 
 def main() -> None:
+    """命令行入口：读评估结果 JSON、生成看板、打印战绩摘要。
+
+    --input 指向的文件不存在时，在几个常见路径里回退查找，兼容实例与本机的目录差异。
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", default="output/final_eval_results.json")
     ap.add_argument("--output", default="output/final_arena_dashboard.html")

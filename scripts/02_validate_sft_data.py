@@ -49,6 +49,10 @@ def normalize(s: str) -> str:
 
 
 def load_seeds_by_id():
+    """读入 train/validation/final_test 全部种子，返回 {seed_id: 种子} 字典。
+
+    三个 split 一起加载，才能识别样本是否误用了 final_test 种子。
+    """
     seeds = {}
     for split in ("train", "validation", "final_test"):
         for p in glob.glob(os.path.join(SEED_DIR, split, "*.jsonl")):
@@ -62,20 +66,27 @@ def load_seeds_by_id():
 
 
 def load_tool_schemas():
+    """读取 tool_schemas.json，返回 {工具名: schema} 的字典。"""
     with open(TOOL_SCHEMA_PATH, encoding="utf-8") as f:
         data = json.load(f)
     return {t["name"]: t for t in data["tools"]}
 
 
 def assistant_text(rec) -> str:
+    """把一条样本里所有 assistant 消息拼成一段文本，供覆盖与违规扫描使用。"""
     return "\n".join(m["content"] for m in rec["messages"] if m["role"] == "assistant")
 
 
 def validate_record(rec, seeds, schemas, seen_hashes, issues):
+    """校验单条样本，返回 (errs, warns)：结构、required_* 覆盖、prohibited 违规、工具调用、去重。
+
+    seen_hashes 由调用方跨文件传入并原地更新，因此 train 与 validation 之间的重复也能查出来。
+    """
     sid = rec.get("seed_id")
     errs, warns = [], []
 
     def err(msg):
+        """记一条错误信息到当前样本的 errs 列表。"""
         errs.append(msg)
 
     seed = seeds.get(sid)
@@ -165,6 +176,7 @@ def validate_record(rec, seeds, schemas, seen_hashes, issues):
 
 
 def load_records(path):
+    """逐行解析 JSONL，返回 (样本列表, 解析失败行数)；坏行只打印不中断，保证能一次看全问题。"""
     records, bad_lines = [], 0
     with open(path, encoding="utf-8") as f:
         for ln, line in enumerate(f, 1):
@@ -180,6 +192,7 @@ def load_records(path):
 
 
 def main():
+    """CLI 入口：校验 train/validation 两份 JSONL 并打印报告，存在任何失败项时退出码为 1。"""
     parser = argparse.ArgumentParser()
     parser.add_argument("--train", default=os.path.join(ROOT, "output", "sft_train.jsonl"))
     parser.add_argument("--val", default=os.path.join(ROOT, "output", "sft_validation.jsonl"))

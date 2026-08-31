@@ -118,6 +118,9 @@ def judge_with_llm(seed: dict, answer: str) -> dict | None:
 
 
 def _bigrams(text: str) -> set:
+    """去标点后切成相邻二字片段集合，供覆盖率近似匹配用。
+    不足两字返回 {整串}，空串返回空集。
+    """
     t = _PUNCT.sub("", text)
     return {t[i:i + 2] for i in range(len(t) - 1)} if len(t) >= 2 else {t} if t else set()
 
@@ -264,6 +267,9 @@ def _locate(rel: str, marker: str = "") -> str:
 
 
 def load_seeds() -> list:
+    """读取 validation 目录下全部 jsonl 种子并合并返回。
+    条数断言必须为 64，不符时报错信息带上查找目录与 cwd，便于排查路径定位问题。
+    """
     seed_dir = _locate(SEED_DIR, marker="category1_validation.jsonl")
     if seed_dir != SEED_DIR:
         print(f"[提示] 数据目录定位为: {seed_dir}")
@@ -277,6 +283,9 @@ def load_seeds() -> list:
 
 
 def load_tool_schemas() -> dict:
+    """读取 tool_schemas.json，返回工具名集合（score_answer 只做名字 in 判断）。
+    找不到文件时打印警告并返回空，跳过工具名校验而不中断评估。
+    """
     p = _locate(TOOL_SCHEMA_PATH)
     if not os.path.isfile(p):
         print(f"[警告] 找不到工具 schema: {p}，将跳过工具名校验")
@@ -286,6 +295,9 @@ def load_tool_schemas() -> dict:
 
 
 def build_user_message(seed: dict) -> str:
+    """把种子的 scenario 与 user_goal 拼成客户口吻的提问。
+    生成、Judge 打分、结果里的 question 字段都用它，保证三处输入完全一致。
+    """
     return f"您好，{seed['scenario']}。我的诉求是：{seed['user_goal']}。请帮我处理。"
 
 
@@ -362,6 +374,10 @@ def selftest() -> None:
 
 
 def main() -> None:
+    """命令行入口：按 --selftest / --rescore / --judge 走自检、复用回答重打分或完整生成评估。
+    产出 sft_eval_results.json、sft_bad_cases.jsonl 与评估报告；
+    Bad Case 判定为总分 ≤10，或除「理解正确性」外任一维度得 0。
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--rescore", action="store_true",
@@ -380,6 +396,11 @@ def main() -> None:
         print("[警告] 未设置 MODELSCOPE_API_KEY/DASHSCOPE_API_KEY，仅用规则打分")
 
     def maybe_judge(seed, answer, rule_result):
+        """未开 --judge 或 Judge 调用失败（返回 None）时，原样返回规则分，即降级路径。
+        Judge 成功则用 7 维 Judge 分覆盖 scores 并重算总分，
+        把 Judge 给的原因插到 flags["缺陷原因"] 最前面，标记 flags["judge"]=True；
+        其余规则标记（半截话、覆盖数等）保留，报告的缺陷命中率仍靠它们统计。
+        """
         if not use_judge:
             return rule_result
         out = judge_with_llm(seed, answer)
@@ -453,10 +474,15 @@ DIM_KEYS = ["理解正确性", "required_facts覆盖", "required_questions追问
 
 
 def _rate(results: list, key: str) -> float:
+    """把某一维度的得分折算成得分率百分比（每维满分 2 分），保留 1 位小数。"""
     return round(sum(r["scores"][key] for r in results) / (2 * len(results)) * 100, 1)
 
 
 def write_report(results: list, bad: list, seeds: list) -> None:
+    """把评估结果写成 markdown 报告 output/sft_eval_report.md：
+    按 category_id 分组的 7 维得分率表、DPO 靶向缺陷命中率、缺陷样本清单（附回答原文）、
+    按命中数排序的 top3 问题，以及各类缺陷对应的 DPO 偏好数据构造建议。
+    """
     by_cat: dict = {}
     for r in results:
         by_cat.setdefault(r["category_id"], []).append(r)

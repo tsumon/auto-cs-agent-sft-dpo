@@ -45,11 +45,13 @@ MAX_LENGTH = 2048
 
 
 def _supported_kwargs(cls, kwargs):
+    """按 cls.__init__ 的签名过滤 kwargs，只保留当前 TRL 版本支持的参数。"""
     params = inspect.signature(cls.__init__).parameters
     return {k: v for k, v in kwargs.items() if k in params}
 
 
 def _warn_dropped_kwargs(cls, kwargs):
+    """打印被当前 TRL 版本签名丢弃的参数名，避免静默降配无从察觉。"""
     params = inspect.signature(cls.__init__).parameters
     for key in kwargs:
         if key not in params:
@@ -57,11 +59,13 @@ def _warn_dropped_kwargs(cls, kwargs):
 
 
 def _make_dpo_config(**kwargs):
+    """构造 DPOConfig：先提示不支持的参数，再只传签名内的参数，兼容不同 trl 版本。"""
     _warn_dropped_kwargs(DPOConfig, kwargs)
     return DPOConfig(**_supported_kwargs(DPOConfig, kwargs))
 
 
 def build_merged_sft_model(tokenizer) -> str:
+    """把 SFT LoRA Adapter 合并进基座并落盘，返回合并权重目录（已存在则直接复用）。"""
     if os.path.exists(os.path.join(MERGED_DIR, "config.json")):
         print(f"[合并] 已存在合并权重，跳过: {MERGED_DIR}")
         return MERGED_DIR
@@ -80,6 +84,7 @@ def build_merged_sft_model(tokenizer) -> str:
 
 
 def check_data() -> None:
+    """校验 DPO 训练集：prompt/chosen/rejected 字段与首条 role 齐全，并统计对数。"""
     if not os.path.exists(TRAIN_FILE):
         sys.exit(f"[错误] 找不到训练数据: {TRAIN_FILE}，请先运行 build_dpo_data_r2.py")
     n = 0
@@ -100,6 +105,7 @@ def check_data() -> None:
 
 
 def main() -> None:
+    """DPO 二轮训练主流程：校验数据 → 合并 SFT 权重 → 挂 LoRA 跑 IPO loss → 保存 Adapter 与指标。"""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
 

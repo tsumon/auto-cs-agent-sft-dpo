@@ -46,6 +46,7 @@ SYSTEM_PROMPT = (
 
 
 def main() -> None:
+    """加载 SFT 合并权重 + DPO Adapter，对 5 个偏好敏感问题贪心生成并打印，供人工自查。"""
     if not os.path.isdir(DPO_ADAPTER_DIR):
         raise SystemExit(f"[错误] 找不到 DPO Adapter 目录: {DPO_ADAPTER_DIR}，请先完成 DPO 训练")
     if not os.path.isdir(SFT_MERGED_DIR):

@@ -34,6 +34,10 @@ SYSTEM_PROMPT = (
 
 
 def main() -> None:
+    """冒烟推理入口：校验 ADAPTER_DIR 存在 → 加载基座（bf16 + sdpa，转 cuda，
+    路径取环境变量 BASE_MODEL_DIR）并挂上 LoRA Adapter → 对 QUESTIONS 里 5 个问题
+    套 chat template 贪心生成（max_new_tokens=512）→ 逐条打印问题与回答。
+    """
     if not os.path.isdir(ADAPTER_DIR):
         raise SystemExit(f"[错误] 找不到 Adapter 目录: {ADAPTER_DIR}，请先完成训练")
 

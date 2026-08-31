@@ -80,6 +80,7 @@ def build_retry_guide(seed: dict, violations: list) -> str:
 
 
 def load_tool_names() -> set:
+    """读取 tool_schemas.json 里的工具名白名单（文件缺失则返回空集，跳过工具名校验）。"""
     p = _locate(TOOL_SCHEMA_PATH)
     if not os.path.isfile(p):
         print(f"[警告] 找不到工具 schema: {p}，工具名校验跳过")
@@ -132,6 +133,7 @@ def fix_answer(answer: str, seed: dict, tool_names: set) -> str:
     BLANK = "我先登记您的需求，待核实相关信息后第一时间答复您。"
 
     def drop_illegal(m):
+        """re.sub 回调：白名单内的工具名原样保留，否则整段 tool_call 换成兜底话术。"""
         try:
             name = json.loads(m.group(1)).get("name", "")
         except json.JSONDecodeError:
@@ -273,6 +275,8 @@ def selftest() -> None:
 
 
 def main() -> None:
+    """约束推理主流程：加载工具白名单与输入 → 挂 DPO Adapter 逐条约束生成 → 增量落盘并统计
+    直接通过/重试通过/兜底修正三类占比（支持断点续跑）。"""
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--input", default="data/v2/seeds/validation",

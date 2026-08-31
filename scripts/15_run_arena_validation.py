@@ -39,6 +39,7 @@ RESULTS_FILE = os.path.join(OUT_DIR, "validation_arena_results.json")
 
 
 def load_answers(path: str) -> dict:
+    """读取回答文件（.jsonl 逐行 / 其余按 json 数组），返回 seed_id -> answer 映射。"""
     with open(path, encoding="utf-8") as f:
         rows = [json.loads(l) for l in f if l.strip()] if path.endswith(".jsonl") \
             else json.load(f)
@@ -46,6 +47,7 @@ def load_answers(path: str) -> dict:
 
 
 def load_seeds() -> list:
+    """加载 validation 的 64 条种子，按 seed_id 排序以固定评审顺序。"""
     import glob
     d = _locate("data/v2/seeds/validation", marker="category1_validation.jsonl")
     seeds = []
@@ -58,6 +60,7 @@ def load_seeds() -> list:
 
 
 def mock_judge(prompt: str) -> dict:
+    """离线假评审：从 prompt 里抽出 A/B 回答，判更长的一方胜，仅供 selftest 跑通管线。"""
     m = __import__("re").search(r"\[回答A\] (.*?)\n\[回答B\] (.*)", prompt, __import__("re").S)
     a, b = m.group(1), m.group(2)
     return {"better": "A" if len(a) >= len(b) else "B", "reason": "mock: 更长更完整"}
@@ -84,6 +87,7 @@ def selftest() -> None:
 
 
 def main() -> None:
+    """约束版 vs 基线 64 场盲测主流程：对齐两侧回答 → 逐场评审 → 统计战绩并写报告。"""
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true")
     ap.add_argument("--pair-single", action="store_true", help="单向评审（省一半调用）")

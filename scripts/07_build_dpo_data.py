@@ -78,15 +78,18 @@ CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
 
 
 def cn(n: int) -> str:
+    """数量转中文量词：2 读作“两”，1-10 用中文数字，超出范围直接转字符串。"""
     return {2: "两"}.get(n, "一二三四五六七八九十"[n - 1] if 1 <= n <= 10 else str(n))
 
 
 def load_jsonl(path: str) -> list:
+    """逐行读 JSONL，跳过空行，返回 dict 列表。"""
     with open(path, encoding="utf-8") as f:
         return [json.loads(l) for l in f if l.strip()]
 
 
 def load_seed_dir(path: str, marker: str) -> dict:
+    """用 marker 文件定位种子目录，加载其下全部 jsonl，返回 {seed_id: 种子}。"""
     d = _locate(path, marker=marker)
     seeds = {}
     for fp in sorted(glob.glob(os.path.join(d, "*.jsonl"))):
@@ -121,6 +124,9 @@ def build_tool_args(seed: dict, tool: str, schemas: dict) -> tuple:
 
 
 def _assemble(seed: dict, schemas: dict, variant: int) -> str:
+    """按 seed_rules 拼装一版 chosen：开场（cat3 加劝阻 / cat6 加救援确认）+ facts 分点
+    +（tool_required 时）tool_call 与缺参追问 + questions 追问 + actions 分步 + 收尾。
+    variant 只换开场措辞，用于打分不达标时重试。"""
     cat = seed["category_id"]
     scenario = seed["scenario"]
     facts = seed.get("required_facts") or []
@@ -205,6 +211,8 @@ def _half_base(seed: dict) -> str:
 
 
 def make_synthetic_rejected(seed: dict, defect: str, idx: int, schemas: dict) -> str:
+    """按缺陷类型在半截话基础上退化出 rejected：完整性类只留半截话，工具规范类改成"已登记"
+    不发起调用，参数编造类发起 tool_call 但参数全取幻觉池，安全话术类去掉劝阻/救援确认。"""
     base = _half_base(seed)
     if defect == "完整性类":
         return base
@@ -232,6 +240,8 @@ def make_synthetic_rejected(seed: dict, defect: str, idx: int, schemas: dict) ->
 # ---------------- 缺陷类型判定（真实回答用） ----------------
 
 def type_real_answer(seed: dict, answer: str, flags: dict, schemas: dict) -> str | None:
+    """由打分 flags 判定真实回答属于哪类缺陷，优先级：安全话术 > 参数编造 > 工具规范 > 完整性；
+    四类都不命中返回 None（无可判定缺陷，不入选）。"""
     scores = flags.pop("_scores", {})
     suspicions = flags.get("编造疑点") or []
     cat = seed["category_id"]
@@ -261,6 +271,8 @@ def margin_ok(sc: int, sr: int, lc: int, lr: int, margin: int, len_ratio: float)
 
 def make_pair(seed: dict, question: str, chosen: str, rejected: str, source: str,
               defect: str, rc: dict, rr: dict, schemas: dict, margin: int, len_ratio: float) -> dict | None:
+    """组装一条 ms-swift DPO 记录（messages + chosen/rejected + 分数长度元信息）；
+    先过 margin_ok，未通过返回 None。"""
     sc, sr = rc["scores"]["总分"], rr["scores"]["总分"]
     ok, why = margin_ok(sc, sr, len(chosen), len(rejected), margin, len_ratio)
     if not ok:
@@ -281,6 +293,7 @@ def make_pair(seed: dict, question: str, chosen: str, rejected: str, source: str
 
 
 def to_trl(p: dict) -> dict:
+    """转 TRL DPOTrainer 会话格式：messages 作 prompt，chosen/rejected 各包成单消息列表。"""
     return {"prompt": p["messages"], "chosen": [p["chosen"]], "rejected": [p["rejected"]]}
 
 
@@ -348,6 +361,7 @@ def fill_synthetic(train: dict, schemas: dict, have: dict, type_targets: dict, m
     ids = sorted(train)
 
     def pool(pred):
+        """按谓词筛未被真实对占用的 train 种子 id。"""
         return [i for i in ids if i not in used and pred(train[i])]
 
     pools = {
@@ -389,6 +403,7 @@ def fill_synthetic(train: dict, schemas: dict, have: dict, type_targets: dict, m
 
 
 def write_report(path: str, pairs: list, dropped: collections.Counter, args) -> None:
+    """写 Markdown 报告：来源/缺陷/类别配比、长度与 margin 统计、构造规则与被过滤原因。"""
     n = len(pairs)
     by_type = collections.Counter(p["defect_type"] for p in pairs)
     by_src = collections.Counter(p["source"] for p in pairs)
@@ -506,6 +521,8 @@ def selftest(schemas: dict) -> None:
 
 
 def main() -> None:
+    """主流程：加载种子与 schema → 收集真实对 → 合成补足各类配额 → 校验配比与总量下限
+    → 写 ms-swift/TRL 两份数据、报告与 10 对抽检。"""
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true", help="自检打分与红线逻辑，不读写数据产物")
     ap.add_argument("--margin", type=int, default=4, help="chosen-rejected 最小规则分差（默认4）")

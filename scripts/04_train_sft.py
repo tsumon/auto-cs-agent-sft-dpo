@@ -38,6 +38,11 @@ MAX_LEN = 2048
 
 
 def main():
+    """SFT 训练入口：合并 ORIG_TRAIN 与 SUPP_TRAIN 两份 jsonl 写临时文件 →
+    加载 tokenizer、train/eval 数据集与 bf16 + sdpa 基座（路径取环境变量 BASE_MODEL_DIR）→
+    按 LoraConfig（r=32/alpha=64，7 个 proj 模块）与 SFTConfig（2 epoch、lr 5e-5、
+    有效 batch 32、按 eval_loss 取最优）建 SFTTrainer 训练 → 保存 adapter、tokenizer 与 train_result.json。
+    """
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
 

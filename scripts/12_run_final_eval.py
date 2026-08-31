@@ -68,6 +68,7 @@ _cache: dict = {}
 
 
 def _cache_load() -> None:
+    """把落盘的 Judge 缓存逐行读回内存 _cache；缓存文件不存在就什么都不做。"""
     if os.path.exists(JUDGE_CACHE):
         with open(JUDGE_CACHE, encoding="utf-8") as f:
             for line in f:
@@ -77,12 +78,17 @@ def _cache_load() -> None:
 
 
 def _cache_get(key: str):
+    """读一条缓存；内存为空时先惰性加载缓存文件。未命中返回 None。"""
     if not _cache:
         _cache_load()
     return _cache.get(key)
 
 
 def _cache_put(key: str, value: dict) -> None:
+    """写一条缓存：存内存并追加落盘。
+
+    已存在的键直接返回，避免同一条结果被重复追加进 jsonl。
+    """
     if key in _cache:
         return
     _cache[key] = value
@@ -92,6 +98,7 @@ def _cache_put(key: str, value: dict) -> None:
 
 
 def _hash(text: str) -> str:
+    """取文本 sha1 的前 16 位，作为缓存键里的内容指纹。"""
     return hashlib.sha1(text.encode("utf-8")).hexdigest()[:16]
 
 BAD_THRESH = 10                # Bad Case：总分<=10 或任一维度 0 分（与里程碑三一致）
@@ -153,6 +160,12 @@ def call_judge(prompt: str, max_tokens: int = 1200) -> dict | None:
 
 
 def call_judge_cached(prompt: str, max_tokens: int = 1200) -> dict | None:
+    """带缓存的竞技场评审调用；未命中缓存才真正打 API。
+
+    缓存键为 arena|Judge模型名|prompt哈希：带模型名是为了换 Judge 时不串用旧结果，
+    带 prompt 哈希是因为站位对调后 prompt 不同，两个方向各存一份。
+    失败返回的 None 不写缓存，留给重跑时补缺口。
+    """
     key = "arena|" + JUDGE_MODEL + "|" + _hash(prompt)
     hit = _cache_get(key)
     if hit is not None:
@@ -176,6 +189,7 @@ def arena_pair(seed: dict, dpo_ans: str, sft_ans: str, pair_single: bool = False
     rule = None  # 兜底用：懒计算规则分差
 
     def one_call(first_is_dpo: bool) -> tuple:
+        """按指定站位调一次评审，把 A/B 判词还原成 dpo/sft（非法值归 tie）；失败返回 (None, "")。"""
         a, b = (dpo_ans, sft_ans) if first_is_dpo else (sft_ans, dpo_ans)
         out = judge_fn(ARENA_PROMPT.format(
             question=build_user_message(seed),
@@ -245,6 +259,11 @@ def judge_cached(seed: dict, answer: str, tag: str):
 
 
 def score_one(seed: dict, answer: str, schemas: dict, use_judge: bool, tag: str = "sft") -> dict:
+    """给一条回答打 7 维分：先跑规则打分器，use_judge 时用 Judge 结果覆盖分数。
+
+    Judge 成功则把判词并入 flags["缺陷原因"]，并置 flags 的 judge / cached 标记；
+    Judge 失败（返回 None）保留规则分，即降级。tag 取 'sft'/'dpo'，只用于缓存键区分。
+    """
     result = score_answer(seed, answer, schemas)
     if use_judge:
         out, from_cache = judge_cached(seed, answer, tag)
@@ -261,6 +280,7 @@ def score_one(seed: dict, answer: str, schemas: dict, use_judge: bool, tag: str 
 
 # ---------------- 输入加载 ----------------
 def load_answers(path: str) -> dict:
+    """读回答 jsonl，返回 {seed_id: 记录} 字典；文件不存在直接断言失败并提示先跑生成脚本。"""
     assert os.path.isfile(path), f"找不到回答文件: {path}（请先运行 scripts/run_final_gen.py）"
     by_id = {}
     with open(path, encoding="utf-8") as f:
@@ -272,6 +292,7 @@ def load_answers(path: str) -> dict:
 
 
 def load_final_seeds() -> list:
+    """加载 final_test 全部种子（按 seed_id 排序）；条数不足 160 直接断言失败。"""
     seed_dir = _locate(SEED_DIR, marker="category1_final_test.jsonl")
     seeds = []
     for fp in sorted(glob.glob(os.path.join(seed_dir, "*.jsonl"))):
@@ -284,10 +305,12 @@ def load_final_seeds() -> list:
 
 # ---------------- 聚合统计 ----------------
 def _mean(xs):
+    """算术均值；空序列返回 0.0（避免除零）。"""
     return sum(xs) / len(xs) if xs else 0.0
 
 
 def _fmt_sec(sec: float) -> str:
+    """把秒数格式化成 h:mm:ss（满 1 小时）或 m:ss，用于耗时/ETA 打印。"""
     sec = int(sec)
     return f"{sec // 3600}:{sec % 3600 // 60:02d}:{sec % 60:02d}" if sec >= 3600 \
         else f"{sec // 60}:{sec % 60:02d}"
@@ -311,10 +334,12 @@ def agg_scores(items: list, model: str) -> dict:
 
 
 def flag_count(items: list, model: str, name: str) -> int:
+    """统计某模型命中指定缺陷标记（如"半截话"）的条数。"""
     return sum(1 for r in items if r[model]["flags"].get(name))
 
 
 def dim_zero_count(items: list, model: str, dim: str) -> int:
+    """统计某维度失分条数：一般维度按 ==0 计，"是否编造"从严按 <2 计（扣分即算编造）。"""
     return sum(1 for r in items if r[model]["scores"][dim] < 2) if dim == "是否编造" else \
         sum(1 for r in items if r[model]["scores"][dim] == 0)
 
@@ -334,6 +359,13 @@ def elo_diff(w_dpo: int, w_sft: int, t: int) -> float:
 def run_pipeline(seeds: list, schemas: dict, sft_by_id: dict, dpo_by_id: dict,
                  out_dir: str, use_judge: bool, pair_single: bool = False,
                  pre_items: list | None = None) -> dict:
+    """终局评估主流程，返回 write_report 的汇总 dict。
+
+    步骤：1) 逐条对两个模型打 7 维分（传了 pre_items 就跳过，供 --arena-only 复用旧分数），
+    打分前断言两模型的问题完全一致；2) 每题跑一场 Arena 盲测，未开 --judge 则用规则分兜底；
+    3) 打印 Judge 覆盖率与补缺口提示；4) 落盘明细 json 与 DPO Bad Case；
+    5) 生成报告；6) 渲染 Arena 看板（失败只告警，不影响评估产物）。
+    """
     global _SCHEMAS
     _SCHEMAS = schemas
     os.makedirs(out_dir, exist_ok=True)
@@ -452,6 +484,12 @@ def run_pipeline(seeds: list, schemas: dict, sft_by_id: dict, dpo_by_id: dict,
 
 # ---------------- 报告 ----------------
 def write_report(items: list, bad: list, use_judge: bool, pair_single: bool, out_dir: str) -> dict:
+    """写 final_eval_report.md，返回 {sft_mean, dpo_mean, delta, win_rate, elo, w, l, t}。
+
+    依次算：总分与 Bad Case 对比、8 类分组、7 维对比、Arena 战绩（Win Rate 与 Elo 分差）、
+    靶向缺陷同口径对比，再挑 Good Case / 列 Bad Case、按阈值分出改善-持平-下降清单、
+    调 build_suggestions 给数据建议，最后按基础能力与规则对齐两组判据合成核心结论。
+    """
     n = len(items)
     os.makedirs(out_dir, exist_ok=True)
     sft_all, dpo_all = agg_scores(items, "sft"), agg_scores(items, "dpo")
@@ -514,9 +552,11 @@ def write_report(items: list, bad: list, use_judge: bool, pair_single: bool, out
 
     # ---- 改善 / 无明显变化 / 能力下降 ----
     def cat_label(c):
+        """把类别行渲染成"cat3 场景名（+0.12）"这样的清单文案。"""
         return f"cat{c['cid']} {c['category']}（{c['delta']:+.2f}）"
 
     def dim_label(d):
+        """把维度行渲染成"维度名（+0.123）"这样的清单文案。"""
         return f"{d['dim']}（{d['delta']:+.3f}）"
 
     improved = [c for c in cat_rows if c["delta"] >= CAT_IMPROVE]
@@ -718,6 +758,11 @@ def write_report(items: list, bad: list, use_judge: bool, pair_single: bool, out
 
 
 def build_suggestions(defect_rows, dim_rows, cat_rows, delta_total, w_dpo, w_sft, t) -> list:
+    """按实测缺口生成下一轮数据补充建议列表（逐条按缺陷残留数命中才写）。
+
+    覆盖安全劝阻/救援确认/编造/tool_call 缺失/半截话/prohibited 恶化等情形，
+    并在整体提升有限时提示收益转向 SFT 数据侧；无命中则返回一条兜底建议。
+    """
     s = []
     get = lambda label: next((d for d in defect_rows if label in d["label"]), {"sft": 0, "dpo": 0})
     safety, rescue = get("安全分流"), get("救援确认")
@@ -808,6 +853,7 @@ def selftest() -> None:
     tool_bad = "这个功能所有车都一样，您直接在中控屏上操作就可以了，费用是 200 元。"
 
     def mock_judge(prompt):  # 竞技场 Mock：更长的回答判胜（确定性）
+        """离线自检用的假评审：从 prompt 里抠出 A/B 回答，判更长的一方胜，结果确定可复现。"""
         m = re.search(r"\[回答A\] (.*?)\n\[回答B\] (.*)", prompt, re.S)
         a, b = m.group(1), m.group(2)
         better = "A" if len(a) >= len(b) else "B"
@@ -848,6 +894,12 @@ def selftest() -> None:
 
 
 def main() -> None:
+    """命令行入口：解析参数 → 载入种子与工具 schema → 跑评估管线。
+
+    --selftest 走离线自检后直接返回；--judge 缺 API Key 时降级为纯规则打分并告警；
+    --arena-only 先校验并载入已有 final_eval_results.json 作为 pre_items（条数须与种子一致）；
+    最后加载两个模型的回答、断言无缺题，再交给 run_pipeline。
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true", help="离线自检全流程（Mock 评审，不打 API）")
     ap.add_argument("--judge", action="store_true", help="用 LLM Judge 打 7 维分 + Arena 盲测")

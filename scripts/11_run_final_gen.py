@@ -58,6 +58,7 @@ GEN_PARAMS = {
 
 
 def load_final_seeds() -> list:
+    """读取 final_test 种子并校验 160 条 = 8 类 × 20 条，按 seed_id 排序保证可复现。"""
     seed_dir = _locate(SEED_DIR, marker="category1_final_test.jsonl")
     if seed_dir != SEED_DIR:
         print(f"[提示] 数据目录定位为: {seed_dir}")
@@ -78,6 +79,7 @@ def load_final_seeds() -> list:
 
 
 def write_questions(seeds: list) -> None:
+    """把统一测试问题集（问题 + 评分所需规则字段）冻结落盘，供两个模型共用与审计。"""
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     with open(QUESTIONS_FILE, "w", encoding="utf-8") as f:
         for s in seeds:
@@ -95,6 +97,7 @@ def write_questions(seeds: list) -> None:
 
 
 def load_done(path: str) -> set:
+    """读出已生成结果文件里的 seed_id 集合，用于断点续跑跳过（文件不存在返回空集）。"""
     if not os.path.exists(path):
         return set()
     done = set()
@@ -139,6 +142,7 @@ def generate(model, tokenizer, seeds: list, out_path: str, model_tag: str) -> No
 
 
 def selftest() -> None:
+    """离线自检：校验种子构造、冻结问题集、打印采样参数与模型路径（不加载模型、不需 GPU）。"""
     seeds = load_final_seeds()
     write_questions(seeds)
     n_tool = sum(1 for s in seeds if s["tool_required"])
@@ -153,6 +157,7 @@ def selftest() -> None:
 
 
 def main() -> None:
+    """生成阶段主流程：冻结问题集后，同一基座先跑 SFT 基线、再挂 DPO Adapter 跑一遍。"""
     ap = argparse.ArgumentParser()
     ap.add_argument("--selftest", action="store_true", help="只校验测试集构造与参数，不加载模型")
     args = ap.parse_args()

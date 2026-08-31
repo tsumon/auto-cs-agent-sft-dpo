@@ -42,6 +42,7 @@ SEED = 42
 
 
 def _cn(n):
+    """阿拉伯数字转中文数字；2 读作"两"，超出 1~10 直接转字符串。"""
     return {2: "两"}.get(n, "一二三四五六七八九十"[n - 1] if 1 <= n <= 10 else str(n))
 
 
@@ -189,6 +190,10 @@ VARIANTS = [variant_a, variant_b, variant_c]
 
 
 def main():
+    """生成 SFT 补充数据：固定随机种子 → 加载 train 种子与 tool schema →
+    每条种子过 3 个变体（共情/诊断/信息不全）生成回答 → 用 score_answer 过滤总分 ≥10 →
+    打乱后截取 TARGET 条，只保留 messages 字段写入 OUT_PATH → 打印均长与按类别条数。
+    """
     random.seed(SEED)
     seeds = load_seed_dir(TRAIN_DIR, marker="category*_train.jsonl")
     schemas = load_schemas()

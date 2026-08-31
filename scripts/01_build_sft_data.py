@@ -138,6 +138,10 @@ NUM_CN = ["零", "一", "两", "三", "四", "五", "六"]
 
 # 追问后用户的应答规则（按关键词匹配，模拟真实用户；具体规则在前，通用兜底在后）
 def user_reply_for_question(q: str, rng: random.Random, last: str = None) -> str:
+    """按关键词匹配生成追问后的用户应答：命中具体规则优先，否则走通用兜底。
+
+    last 传入上一轮已用过的回复，用于避开连续重复的说法。
+    """
     pairs = [
         (["限高", "车位"], ["地库限高大概两米，我的车位在B2层，坡道比较陡。"]),
         (["有人", "宠物", "被困"], ["车里没有其他人，也没有宠物，就我自己。", "没有，就我一个人在车里，宠物没带上。"]),
@@ -181,20 +185,24 @@ def user_reply_for_question(q: str, rng: random.Random, last: str = None) -> str
 # ---------------------------------------------------------------------------
 
 def load_tool_schemas():
+    """读取 tool_schemas.json，返回 {工具名: schema} 的字典。"""
     with open(TOOL_SCHEMA_PATH, encoding="utf-8") as f:
         data = json.load(f)
     return {t["name"]: t for t in data["tools"]}
 
 
 def gen_vin(rng: random.Random) -> str:
+    """生成占位车架号（VIN）：固定前缀 LSVA + 13 位随机数字。"""
     return "LSVA" + "".join(str(rng.randint(0, 9)) for _ in range(13))
 
 
 def gen_work_order_id(rng: random.Random) -> str:
+    """生成占位工单号：固定前缀 WO26 + 8 位随机数字。"""
     return "WO26" + "".join(str(rng.randint(0, 9)) for _ in range(8))
 
 
 def gen_case_id(rng: random.Random) -> str:
+    """生成占位案件号：固定前缀 CC26 + 6 位随机数字。"""
     return "CC26" + "".join(str(rng.randint(0, 9)) for _ in range(6))
 
 
@@ -256,6 +264,7 @@ def fill_tool_args(tool_name: str, seed: dict, rng: random.Random, schemas: dict
 
 
 def tool_call_block(name: str, args: dict) -> str:
+    """把工具名与参数包成 <tool_call>{...}</tool_call> 文本块，供模型学习该输出格式。"""
     return "<tool_call>\n" + json.dumps({"name": name, "arguments": args}, ensure_ascii=False) + "\n</tool_call>"
 
 
@@ -272,6 +281,7 @@ SCENARIO_PREFIXES = [
 
 
 def clean_scenario(scenario: str) -> str:
+    """剥离种子 scenario 里的固定前缀，以及开头的'客户'二字，得到干净的情境描述。"""
     s = scenario.strip()
     for p in SCENARIO_PREFIXES:
         if s.startswith(p):
@@ -291,10 +301,15 @@ def situation_for(seed) -> str:
 
 
 def is_agent_role(role: str) -> bool:
+    """判断 customer_role 是否为代人咨询（家属或代办人），决定用「车主」还是「我」自称。"""
     return role in ("家属或代办人",)
 
 
 def load_seeds(split: str):
+    """按 split（train/validation）读入 seeds 目录下所有 jsonl 种子，返回 dict 列表。
+
+    文件名排序后逐行读取，保证同一份种子库多次运行的顺序一致。
+    """
     paths = sorted(glob.glob(os.path.join(SEED_DIR, split, "*.jsonl")))
     seeds = []
     for p in paths:
@@ -307,6 +322,7 @@ def load_seeds(split: str):
 
 
 def rng_for(seed_id: str, variant: int) -> random.Random:
+    """用 (seed_id, variant) 派生确定性随机源，使脚本可重复运行、产出逐字节一致。"""
     return random.Random(f"{seed_id}::v{variant}")
 
 
@@ -315,11 +331,16 @@ def rng_for(seed_id: str, variant: int) -> random.Random:
 # ---------------------------------------------------------------------------
 
 def join_numbered(items):
+    """把条目串成「①xxx；②yyy。」形式，最多支持 6 条。"""
     marks = ["①", "②", "③", "④", "⑤", "⑥"]
     return "；".join(f"{marks[i]}{it}" for i, it in enumerate(items)) + "。"
 
 
 def facts_sentence(facts, rng):
+    """把 required_facts 组装成一句带引导语的编号说明；facts 为空则返回空串。
+
+    引导语里的 {num} 用中文数字替换，保证条数与实际条目对得上。
+    """
     if not facts:
         return ""
     lead = rng.choice(FACT_LEADS).replace("{num}", NUM_CN[min(len(facts), 6)])
@@ -327,6 +348,10 @@ def facts_sentence(facts, rng):
 
 
 def questions_sentence(questions, rng, shuffle=False):
+    """把 required_questions 组装成追问句：单条用短引导语，多条用编号列表。
+
+    shuffle=True 时打乱提问顺序，用于生成同一种子的表达变体，覆盖内容不变。
+    """
     if not questions:
         return ""
     qs = list(questions)
@@ -339,6 +364,7 @@ def questions_sentence(questions, rng, shuffle=False):
 
 
 def actions_sentence(actions, rng):
+    """把 required_actions 组装成一句带引导语的处理建议；actions 为空则返回空串。"""
     if not actions:
         return ""
     lead = rng.choice(ACTION_LEADS)
@@ -346,6 +372,7 @@ def actions_sentence(actions, rng):
 
 
 def empathy_for(seed, rng):
+    """按类目挑共情开场语：类目 3/6 涉安全走 EMPATHY_SAFE，类目 8 走主动关怀口径。"""
     if seed["category_id"] in (3, 6):
         return rng.choice(EMPATHY_SAFE)
     if seed["category_id"] == 8:
@@ -354,6 +381,10 @@ def empathy_for(seed, rng):
 
 
 def build_user_first_message(seed, rng, style: str, extra_info: str = "") -> str:
+    """组装用户首条消息：按角色/类目挑开场语，style="full" 时补车辆细节与求助句。
+
+    extra_info 用于把工具必需参数（车架号、工单号、城市）塞进用户口述，避免客服凭空编参数。
+    """
     sit = situation_for(seed)
     if is_agent_role(seed.get("customer_role", "")):
         opener = rng.choice(USER_OPENERS_AGENT)
@@ -374,6 +405,10 @@ def build_user_first_message(seed, rng, style: str, extra_info: str = "") -> str
 
 
 def build_assistant_single_turn(seed, rng, questions_order="keep") -> str:
+    """组装单轮客服回复：共情 + 情境复述 + 事实 + 追问 + 行动 + 收尾。
+
+    顺序固定，保证 required_facts/questions/actions 三类内容逐条出现，便于 02 做覆盖校验。
+    """
     parts = [empathy_for(seed, rng)]
     sit = situation_for(seed)
     parts.append(f"您反映的情况是「{sit}」，我来帮您分析处理。")
@@ -468,6 +503,7 @@ def build_tool_call_turn(seed, rng, schemas) -> tuple:
 # ---------------------------------------------------------------------------
 
 def make_record(seed, messages, sample_type, variant, tool_call=None):
+    """把 messages 和种子元信息（seed_id/类目/tool_name 等）打包成一条 JSONL 样本。"""
     rec = {
         "seed_id": seed["seed_id"],
         "split": seed["split"],
@@ -486,6 +522,10 @@ def make_record(seed, messages, sample_type, variant, tool_call=None):
 
 
 def gen_variants_for_seed(seed, schemas):
+    """一条种子最多产出 3 个变体：v0 单轮完整、v1 工具调用或换表达单轮、v2 多轮追问。
+
+    v1/v2 都带条件：无 tool_required 时退化为换问题顺序的单轮，无 required_questions 时不生成多轮。
+    """
     recs = []
     # v0: 单轮完整信息
     rng = rng_for(seed["seed_id"], 0)
@@ -517,6 +557,10 @@ def gen_variants_for_seed(seed, schemas):
 
 
 def dedup_and_filter(records):
+    """按 messages 的 md5 去重并做长度过滤，返回 (保留样本, 剔除原因计数)。
+
+    user 超 600 字或 assistant 不在 20~2500 字区间的样本直接丢弃，与 02 的长度校验口径一致。
+    """
     seen = set()
     out, dropped = [], Counter()
     for r in records:
@@ -541,6 +585,7 @@ def dedup_and_filter(records):
 
 
 def write_jsonl(path, records):
+    """逐行写出 JSONL（ensure_ascii=False 保留中文），自动创建父目录。"""
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         for r in records:
@@ -548,6 +593,7 @@ def write_jsonl(path, records):
 
 
 def print_seed_stats(seeds, title):
+    """打印种子集的总数、tool_required 条数与各类目分布，便于生成前对账。"""
     cnt = Counter(s["category_id"] for s in seeds)
     tool = sum(1 for s in seeds if s.get("tool_required"))
     print(f"[{title}] 种子总数={len(seeds)}  tool_required={tool}")
@@ -575,6 +621,7 @@ def api_generate(seeds, args):
     headers = {"Authorization": f"Bearer {key}", "Content-Type": "application/json"}
 
     def call(seed):
+        """对单条种子发一次请求，最多重试 3 次；全部失败返回 None 并跳过该种子。"""
         user_prompt = (
             f"请基于以下种子生成一条 SFT 样本，输出 JSON：{{\"messages\":[...]}}。\n"
             f"种子：{json.dumps(seed, ensure_ascii=False)}"
@@ -616,6 +663,10 @@ def api_generate(seeds, args):
 # ---------------------------------------------------------------------------
 
 def main():
+    """CLI 入口：按 template/api 模式生成 train 与 validation 两份 JSONL 并打印分布统计。
+
+    验证集只生成单轮和工具调用两种变体，不做多轮追问。
+    """
     parser = argparse.ArgumentParser(description="构造汽车售后客服 SFT 数据")
     parser.add_argument("--mode", choices=["template", "api"], default="template",
                         help="template=话术池+规则组装（默认）；api=调用 OpenAI 兼容接口")
