@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="title desc">
+  <title id="title">SFT vs DPO vs 约束层：终局几乎打平，约束层才把 Bad Case 砍掉 45%</title>
+  <desc id="desc">final_test 160 条上 DPO 相对 SFT 均分 Δ −0.06、Arena 平局 130。validation 64 条同一 GLM Judge 下，约束层把均分从 8.66 提到 10.50，Bad Case 从 49 降到 27。</desc>
+
+  <defs>
+    <clipPath id="res-clip">
+      <rect width="1200" height="400" rx="8"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#res-clip)">
+    <rect width="1200" height="400" fill="#171310"/>
+    <rect x="0" y="0" width="8" height="400" fill="#E24A2A"/>
+
+    <text x="56" y="48" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="1.6" fill="#9A8E82">QC BOARD  ·  同一把尺子才可比</text>
+    <text x="56" y="88" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#F4EDE3">DPO 几乎不动针，约束层才过闸</text>
+
+    <!-- panel A: final_test -->
+    <g transform="translate(56 112)">
+      <text x="0" y="22" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#C9B59A">A  终局  final_test 160  ·  DeepSeek Arena 盲测</text>
+
+      <g transform="translate(0 38)">
+        <rect width="268" height="118" rx="6" fill="#2A221C"/>
+        <text x="20" y="32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#9A8E82">SFT 基线</text>
+        <text x="20" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="40" font-weight="800" fill="#F4EDE3">9.41</text>
+        <text x="118" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#9A8E82">/ 14</text>
+        <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#9A8E82">Bad Case 117  ·  胜 19</text>
+      </g>
+
+      <g transform="translate(284 38)">
+        <rect width="268" height="118" rx="6" fill="#2A221C"/>
+        <text x="20" y="32" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#9A8E82">DPO R2</text>
+        <text x="20" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="40" font-weight="800" fill="#F4EDE3">9.36</text>
+        <text x="118" y="78" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#9A8E82">/ 14</text>
+        <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#E24A2A">Δ −0.06  ·  平 130 / 160</text>
+      </g>
+
+      <g transform="translate(568 38)">
+        <rect width="520" height="118" rx="6" fill="#2A221C"/>
+        <text x="24" y="36" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="20" font-weight="600" fill="#F4EDE3">结论：偏好对齐无显著增量</text>
+        <text x="24" y="66" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">7 维全平（±0.03）。GLM 与 DeepSeek 都给出高平局率，</text>
+        <text x="24" y="92" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">说明两模型输出本身接近，不是 Judge 分不清。</text>
+      </g>
+    </g>
+
+    <!-- panel B: constraint -->
+    <g transform="translate(56 292)">
+      <text x="0" y="0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#2F8F6B">B  生产加固  validation 64  ·  同一 GLM-4-Flash Judge</text>
+
+      <g transform="translate(0 16)">
+        <rect width="268" height="72" rx="6" fill="#2A221C"/>
+        <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#9A8E82">DPO 裸生成</text>
+        <text x="20" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#F4EDE3">8.66</text>
+        <text x="88" y="58" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#9A8E82">Bad 49</text>
+      </g>
+
+      <g transform="translate(284 16)">
+        <rect width="268" height="72" rx="6" fill="#1C332A" stroke="#2F8F6B" stroke-width="1.4"/>
+        <text x="20" y="32" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#2F8F6B">+ 约束层</text>
+        <text x="20" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="24" font-weight="700" fill="#F4EDE3">10.50</text>
+        <text x="102" y="58" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#2F8F6B">Bad 27  −45%</text>
+      </g>
+
+      <g transform="translate(568 16)">
+        <rect width="520" height="72" rx="6" fill="#2A221C"/>
+        <text x="24" y="32" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#F4EDE3">零训练成本，当天生效。</text>
+        <text x="24" y="56" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">工具名幻觉 0 · 乱调用 0 · cat6 救援确认 8/8</text>
+      </g>
+    </g>
+  </g>
+</svg>

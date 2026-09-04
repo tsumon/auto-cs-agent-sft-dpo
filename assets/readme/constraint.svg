@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="380" viewBox="0 0 1200 380" role="img" aria-labelledby="title desc">
+  <title id="title">推理期约束闸口：校验、带答案重试、规则兜底</title>
+  <desc id="desc">生成后按业务规则校验。违规则把正确答案写进修正指令再采样重试；三次仍失败则规则兜底。工具名必须在 55 个白名单内，参数只能逐字取自用户话语。</desc>
+
+  <defs>
+    <clipPath id="gate-clip">
+      <rect width="1200" height="380" rx="8"/>
+    </clipPath>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 1 L8 5 L0 9 Z" fill="#C9B59A"/>
+    </marker>
+  </defs>
+
+  <g clip-path="url(#gate-clip)">
+    <rect width="1200" height="380" fill="#171310"/>
+    <rect x="0" y="0" width="8" height="380" fill="#2F8F6B"/>
+
+    <text x="56" y="46" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" letter-spacing="1.6" fill="#9A8E82">CHECKPOINT  ·  14_constrained_infer.py</text>
+    <text x="56" y="86" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="32" font-weight="700" fill="#F4EDE3">生成之后过闸，而不是再训一轮</text>
+
+    <!-- four equal bays: 248 + 32 gap -->
+    <g transform="translate(56 118)">
+      <rect width="248" height="150" rx="6" fill="#2A221C"/>
+      <text x="20" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#9A8E82">01  GENERATE</text>
+      <text x="20" y="72" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#F4EDE3">裸生成</text>
+      <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">DPO 适配器</text>
+      <text x="20" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#9A8E82">max 1024 tokens</text>
+
+      <line x1="256" y1="75" x2="272" y2="75" stroke="#C9B59A" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <g transform="translate(280 0)">
+        <rect width="248" height="150" rx="6" fill="#2A221C" stroke="#C9B59A" stroke-width="1.2"/>
+        <text x="20" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#C9B59A">02  VALIDATE</text>
+        <text x="20" y="72" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#F4EDE3">规则校验</text>
+        <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">工具白名单 / 原话参数</text>
+        <text x="20" y="130" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">cat3 劝阻 / cat6 救援</text>
+      </g>
+
+      <line x1="536" y1="75" x2="552" y2="75" stroke="#C9B59A" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <g transform="translate(560 0)">
+        <rect width="248" height="150" rx="6" fill="#2A221C"/>
+        <text x="20" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#E24A2A">03  RETRY</text>
+        <text x="20" y="72" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#F4EDE3">带答案重试</text>
+        <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">指令里写上正确工具</text>
+        <text x="20" y="130" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#E24A2A">必须采样 · 最多 3 次</text>
+      </g>
+
+      <line x1="816" y1="75" x2="832" y2="75" stroke="#C9B59A" stroke-width="2" marker-end="url(#arrow)"/>
+
+      <g transform="translate(840 0)">
+        <rect width="248" height="150" rx="6" fill="#1C332A" stroke="#2F8F6B" stroke-width="1.4"/>
+        <text x="20" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#2F8F6B">04  FALLBACK</text>
+        <text x="20" y="72" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#F4EDE3">规则兜底</text>
+        <text x="20" y="104" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#D8CFC4">删掉非法 tool_call</text>
+        <text x="20" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#2F8F6B">re.sub  ·  not replace</text>
+      </g>
+    </g>
+
+    <!-- red lines -->
+    <g transform="translate(56 292)" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18">
+      <rect width="1088" height="56" rx="6" fill="#2A221C"/>
+      <text x="24" y="36" fill="#D8CFC4">红线：chosen 的工具参数只能逐字取自用户话语；缺参追问，绝不编造查询结果。</text>
+    </g>
+  </g>
+</svg>
