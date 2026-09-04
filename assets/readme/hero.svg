@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">汽车售后智能客服 · auto-cs-agent-sft-dpo</title>
+  <desc id="desc">把 Qwen2.5-7B 微调成覆盖 8 类售后场景的客服。SFT 教会格式，DPO 几乎不动针，推理期约束层把 Bad Case 砍掉 45%。</desc>
+
+  <defs>
+    <clipPath id="hero-clip">
+      <rect width="1200" height="420" rx="8"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#hero-clip)">
+    <rect width="1200" height="420" fill="#171310"/>
+
+    <!-- oil-bay floor line -->
+    <rect x="0" y="412" width="1200" height="8" fill="#2A221C"/>
+    <rect x="0" y="0" width="8" height="420" fill="#E24A2A"/>
+
+    <!-- VIN plate -->
+    <g transform="translate(56 36)">
+      <rect width="268" height="36" rx="4" fill="#2A221C" stroke="#C9B59A" stroke-width="1.4"/>
+      <circle cx="12" cy="18" r="3.2" fill="#9A8E82"/>
+      <circle cx="256" cy="18" r="3.2" fill="#9A8E82"/>
+      <text x="134" y="24" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="1.8" fill="#F4EDE3">AUTO-CS · QWEN2.5-7B</text>
+    </g>
+    <text x="344" y="60" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#9A8E82">LoRA r=32 · MI300X · 55 tools</text>
+
+    <text x="56" y="128" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="52" font-weight="800" fill="#F4EDE3">汽车售后智能客服</text>
+
+    <text x="56" y="172" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#9A8E82">SFT</text>
+    <text x="108" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#5C534C">→</text>
+    <text x="138" y="172" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="600" fill="#9A8E82">DPO</text>
+    <text x="198" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="22" fill="#5C534C">→</text>
+    <text x="228" y="172" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#2F8F6B">约束层</text>
+    <text x="314" y="172" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="20" fill="#9A8E82">才是生产方案</text>
+
+    <text x="56" y="214" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="20" fill="#D8CFC4">把通用 7B 调成 8 类售后客服。DPO 在终局上几乎不动针；</text>
+    <text x="56" y="242" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="20" fill="#D8CFC4">推理期校验 → 带答案重试 → 兜底，把 Bad Case 砍掉 45%。</text>
+
+    <g transform="translate(56 262)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16">
+      <rect width="118" height="28" rx="4" fill="#2A221C"/>
+      <text x="59" y="19" text-anchor="middle" fill="#F4EDE3">train 640</text>
+      <rect x="128" width="110" height="28" rx="4" fill="#2A221C"/>
+      <text x="183" y="19" text-anchor="middle" fill="#F4EDE3">val 64</text>
+      <rect x="248" width="196" height="28" rx="4" fill="#2A221C" stroke="#E24A2A" stroke-width="1.2"/>
+      <text x="346" y="19" text-anchor="middle" fill="#E24A2A">final_test 160 冻结</text>
+    </g>
+
+    <!-- 8 service bays, two rows of four -->
+    <g transform="translate(56 300)" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif">
+      <g>
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-1</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">用车功能</text>
+      </g>
+      <g transform="translate(136 0)">
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-2</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">保养质保</text>
+      </g>
+      <g transform="translate(272 0)">
+        <rect width="128" height="50" rx="4" fill="#2A221C" stroke="#E24A2A" stroke-width="1.2"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#E24A2A">CAT-3</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">故障分流</text>
+      </g>
+      <g transform="translate(408 0)">
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-4</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">预约受理</text>
+      </g>
+      <g transform="translate(0 58)">
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-5</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">维修交车</text>
+      </g>
+      <g transform="translate(136 58)">
+        <rect width="128" height="50" rx="4" fill="#2A221C" stroke="#E24A2A" stroke-width="1.2"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#E24A2A">CAT-6</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">道路救援</text>
+      </g>
+      <g transform="translate(272 58)">
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-7</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">投诉升级</text>
+      </g>
+      <g transform="translate(408 58)">
+        <rect width="128" height="50" rx="4" fill="#2A221C"/>
+        <text x="12" y="20" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">CAT-8</text>
+        <text x="12" y="40" font-size="18" font-weight="600" fill="#F4EDE3">客户运营</text>
+      </g>
+    </g>
+
+    <!-- work-order ticket -->
+    <g transform="translate(700 36)">
+      <rect width="444" height="340" rx="6" fill="#FBF6EE"/>
+      <!-- perforation -->
+      <g fill="#171310">
+        <circle cx="0" cy="28" r="5"/>
+        <circle cx="0" cy="68" r="5"/>
+        <circle cx="0" cy="108" r="5"/>
+        <circle cx="0" cy="148" r="5"/>
+        <circle cx="0" cy="188" r="5"/>
+        <circle cx="0" cy="228" r="5"/>
+        <circle cx="0" cy="268" r="5"/>
+        <circle cx="0" cy="308" r="5"/>
+      </g>
+      <line x1="18" y1="16" x2="18" y2="324" stroke="#D8CFC4" stroke-width="1.2" stroke-dasharray="3 7"/>
+
+      <text x="36" y="36" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" letter-spacing="1.4" fill="#9A8E82">WORK ORDER  ·  WO-CS-014</text>
+      <rect x="328" y="18" width="96" height="24" rx="3" fill="#E24A2A"/>
+      <text x="376" y="36" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" font-weight="700" fill="#FBF6EE">CAT-6</text>
+
+      <text x="36" y="74" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="22" font-weight="700" fill="#2C241C">道路救援 · 地下车库</text>
+      <text x="36" y="100" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#6B6056">VIN  LSVA3616283715801</text>
+      <text x="36" y="126" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" fill="#2C241C">普通拖车进不去。先保证安全，再调度。</text>
+
+      <rect x="36" y="146" width="388" height="108" rx="4" fill="#171310"/>
+      <text x="52" y="172" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">&lt;tool_call&gt;</text>
+      <text x="52" y="196" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" fill="#F4EDE3">roadside_assistance_dispatch</text>
+      <text x="52" y="220" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="16" fill="#C9B59A">location: B2 · 限高约 2m</text>
+      <text x="52" y="240" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14" fill="#9A8E82">&lt;/tool_call&gt;  参数只取用户原话</text>
+
+      <rect x="36" y="270" width="388" height="50" rx="4" fill="#E8F4EE"/>
+      <circle cx="58" cy="295" r="8" fill="#2F8F6B"/>
+      <path d="M53 295 L57 299 L65 290" fill="none" stroke="#FBF6EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="78" y="290" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#2F8F6B">约束闸口  PASS</text>
+      <text x="78" y="312" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Segoe UI', sans-serif" font-size="16" fill="#2C241C">请勿继续行驶 · 已发起救援</text>
+    </g>
+  </g>
+</svg>
